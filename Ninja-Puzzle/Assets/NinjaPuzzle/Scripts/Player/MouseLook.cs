@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NinjaPuzzle.Scripts
+namespace NinjaPuzzle.Scripts.Player
 {
 	public class MouseLook : MonoBehaviour
 	{
