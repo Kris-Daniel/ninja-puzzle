@@ -45,13 +45,23 @@ namespace NinjaPuzzle.Code.Unity.Tools
 		{
 			int i;
 			Vector3? hitPos = null;
+			
+			for (i = 0; i < arcArray.Length; i++)
+			{
+				print(arcArray[i].magnitude);
+				float y = arcArray[i].magnitude * Mathf.Sin(Mathf.Deg2Rad * transform.localRotation.x);
+				float z = arcArray[i].magnitude * Mathf.Cos(Mathf.Deg2Rad * transform.localRotation.x);
+				//arcArray[i] = arcArray[i] + new Vector3(0, y, z);
+			}
+			
 			for (i = 0; i < arcArray.Length - 1; i++)
 			{
 				RaycastHit hit;
-				Vector3 direction = arcArray[i + 1] - arcArray[i];
+				Vector3 direction = PointGlobalPos(arcArray[i + 1]) - PointGlobalPos(arcArray[i]);
+				Debug.DrawRay(PointGlobalPos(arcArray[i]), direction, Color.red);
 				if (Physics.Raycast(PointGlobalPos(arcArray[i]), direction , out hit, direction.magnitude))
 				{
-					hitPos = hit.point - transform.position;
+					hitPos = hit.point;
 					i++;
 					break;
 				}
@@ -61,14 +71,30 @@ namespace NinjaPuzzle.Code.Unity.Tools
 			
 			Array.Copy(arcArray, 0, rayCastedArray, 0, i);
 
-			rayCastedArray[i] = hitPos ?? arcArray[i];
+			if (hitPos != null)
+			{
+				Vector3 lastPoint = Vector3.zero;
+				
+				Debug.DrawRay(hitPos.Value, Vector3.up, Color.green);
+
+				Vector3 zeroHeight = hitPos.Value - transform.position;
+				zeroHeight.y = 0;
+				lastPoint.z = zeroHeight.magnitude;
+				lastPoint.y = hitPos.Value.y - transform.position.y;
+				rayCastedArray[i] = lastPoint;
+			}
+			else
+			{
+				rayCastedArray[i] = arcArray[i];
+			}
 			
 			return rayCastedArray;
 		}
 
 		Vector3 PointGlobalPos(Vector3 point)
 		{
-			return transform.position + point;
+			Vector3 pos = transform.position + transform.forward * point.z + transform.up * point.y;
+			return pos;
 		}
 
 		private Vector3[] CalculateArcArray()
@@ -89,9 +115,9 @@ namespace NinjaPuzzle.Code.Unity.Tools
 
 		private Vector3 CalculateArcPoint(float t, float maxDistance)
 		{
-			float x = t * maxDistance;
-			float y = x * Mathf.Tan(m_radianAngle) - ((m_gravity * x * x) / (2 * velocity * velocity * Mathf.Cos(m_radianAngle) * Mathf.Cos(m_radianAngle)));
-			return new Vector3(x, y);
+			float z = t * maxDistance;
+			float y = z * Mathf.Tan(m_radianAngle) - ((m_gravity * z * z) / (2 * velocity * velocity * Mathf.Cos(m_radianAngle) * Mathf.Cos(m_radianAngle)));
+			return new Vector3(0, y, z);
 		}
 	}
 }
