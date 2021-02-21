@@ -9,7 +9,7 @@ namespace NinjaPuzzle.Code.Unity.GameSetup
 		public GameInstance GameInstance { get; private set; }
 		public GameController GameController => GameInstance.GameController;
 
-		public void InitializeGame()
+		protected override void Init()
 		{
 			UnityGameInstance = UnityGameSetupFactory.Create();
 			

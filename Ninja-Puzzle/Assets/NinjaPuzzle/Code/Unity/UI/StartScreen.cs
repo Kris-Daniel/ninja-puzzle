@@ -1,5 +1,5 @@
-﻿using NinjaPuzzle.Code.Unity.GameSetup;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace NinjaPuzzle.Code.Unity.UI
@@ -16,7 +16,7 @@ namespace NinjaPuzzle.Code.Unity.UI
 
 		void InitButtonActions()
 		{
-			startButton.onClick.AddListener(NinjaPuzzleApp.Instance.InitializeGame);
+			startButton.onClick.AddListener(() => SceneManager.LoadScene(1));
 			
 			exitButton.onClick.AddListener(Application.Quit);
 		}

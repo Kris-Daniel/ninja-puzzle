@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NinjaPuzzle.Code.Unity.GameSetup;
+using UnityEngine;
 
 namespace NinjaPuzzle.Code.Unity.Player
 {
@@ -13,6 +14,7 @@ namespace NinjaPuzzle.Code.Unity.Player
 		void Start()
 		{
 			Cursor.lockState = CursorLockMode.Locked;
+			print(NinjaPuzzleApp.Instance.GameController.RuntimeData.LevelProgress);
 		}
 
 		// Update is called once per frame

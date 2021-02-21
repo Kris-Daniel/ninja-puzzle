@@ -45,7 +45,7 @@ namespace NinjaPuzzle.Code.Unity.Helpers.Singleton
 		{
 			if (m_Instance != null && m_Instance != this)
 			{
-				Debug.LogErrorFormat(this, "There's already a singleton of type {0}, destroying copy", GetType());
+				Debug.Log("There's already a singleton of type " + this + ", destroying copy");
 				Destroy(gameObject);
 				return;
 			}
