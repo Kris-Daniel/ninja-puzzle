@@ -1,14 +1,23 @@
-﻿using NinjaPuzzle.Code.Unity.Helpers.Singleton;
+﻿using NinjaPuzzle.Code.Gameplay;
+using NinjaPuzzle.Code.Unity.Helpers.Singleton;
 
 namespace NinjaPuzzle.Code.Unity.GameSetup
 {
 	public class NinjaPuzzleApp : ASingleton<NinjaPuzzleApp>
 	{
-		private UnityGameInstance m_unityGameInstance;
-		
-		protected override void Init()
+		public UnityGameInstance UnityGameInstance { get; private set; }
+		public GameInstance GameInstance { get; private set; }
+		public GameController GameController => GameInstance.GameController;
+
+		public void InitializeGame()
 		{
-			m_unityGameInstance = UnityGameSetupFactory.Create();
+			UnityGameInstance = UnityGameSetupFactory.Create();
+			
+			UnityGameInstance.CreateGameInstance();
+			
+			GameInstance = UnityGameInstance.Game;
+			
+			GameController.EventManager.OnGameInitialized.Invoke(GameController);
 		}
 	}
 }

@@ -16,5 +16,10 @@
 				GameController = null;
 			}
 		}
+
+		public virtual void Update()
+		{
+			
+		}
 	}
 }

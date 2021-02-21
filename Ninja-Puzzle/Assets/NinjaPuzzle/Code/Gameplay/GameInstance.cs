@@ -1,12 +1,14 @@
-﻿namespace NinjaPuzzle.Code.Gameplay
+﻿using NinjaPuzzle.Code.Gameplay.Interfaces;
+
+namespace NinjaPuzzle.Code.Gameplay
 {
 	public sealed class GameInstance
 	{
 		public GameController GameController { get; private set; }
 
-		public GameInstance()
+		public GameInstance(IGameSaveData gameSaveData)
 		{
-			GameController = new GameController(this);
+			GameController = new GameController(this, gameSaveData);
 		}
 		
 		public void Start()
