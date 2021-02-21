@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace NinjaPuzzle.Scripts.Player
+namespace NinjaPuzzle.Code.Unity.Player
 {
 	public class PlayerInteractController : MonoBehaviour
 	{
