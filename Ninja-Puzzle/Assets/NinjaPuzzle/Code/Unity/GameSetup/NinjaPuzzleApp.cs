@@ -19,5 +19,11 @@ namespace NinjaPuzzle.Code.Unity.GameSetup
 			
 			GameController.EventManager.OnGameInitialized.Invoke(GameController);
 		}
+
+		private void Update()
+		{
+			GameInstance?.Update();
+			UnityGameInstance?.Update();
+		}
 	}
 }

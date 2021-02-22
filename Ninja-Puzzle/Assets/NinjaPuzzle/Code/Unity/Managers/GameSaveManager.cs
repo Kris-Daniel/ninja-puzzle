@@ -2,7 +2,7 @@
 
 namespace NinjaPuzzle.Code.Unity.Managers
 {
-	public class GameSaveManager : IGameSaveData
+	public class GameSaveManager : AUnityManager, IGameSaveData
 	{
 		public int LevelProgress { get; set; }
 		public IGameSaveData CurrentGameSave => this;

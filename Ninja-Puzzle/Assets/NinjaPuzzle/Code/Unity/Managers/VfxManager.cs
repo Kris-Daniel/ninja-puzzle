@@ -1,6 +1,6 @@
 ﻿namespace NinjaPuzzle.Code.Unity.Managers
 {
-	public class VfxManager
+	public class VfxManager : AUnityManager
 	{
 		
 	}
