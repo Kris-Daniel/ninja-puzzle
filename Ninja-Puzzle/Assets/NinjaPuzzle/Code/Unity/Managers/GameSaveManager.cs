@@ -1,4 +1,5 @@
 ﻿using NinjaPuzzle.Code.Gameplay.Interfaces;
+using NinjaPuzzle.Code.Unity.GameSetup;
 
 namespace NinjaPuzzle.Code.Unity.Managers
 {
@@ -6,8 +7,9 @@ namespace NinjaPuzzle.Code.Unity.Managers
 	{
 		public int LevelProgress { get; set; }
 		public IGameSaveData CurrentGameSave => this;
-		
-		public GameSaveManager()
+
+
+		public GameSaveManager(UnityGameInstance unityGameInstance) : base(unityGameInstance)
 		{
 			LevelProgress = 1;
 		}

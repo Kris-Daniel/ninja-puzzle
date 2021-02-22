@@ -12,9 +12,9 @@ namespace NinjaPuzzle.Code.Unity.GameSetup
 
 		public UnityGameInstance()
 		{
-			GameSaveManager = new GameSaveManager();
-			VfxManager = new VfxManager();
-			InputManager = new InputManager();
+			GameSaveManager = new GameSaveManager(this);
+			VfxManager = new VfxManager(this);
+			InputManager = new InputManager(this);
 		}
 
 		public void CreateGameInstance()
