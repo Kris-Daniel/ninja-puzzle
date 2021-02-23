@@ -1,4 +1,5 @@
 ﻿using NinjaPuzzle.Code.Gameplay.Interfaces;
+using NinjaPuzzle.Code.Gameplay.Inventory;
 using NinjaPuzzle.Code.Gameplay.Managers;
 
 namespace NinjaPuzzle.Code.Gameplay
@@ -11,6 +12,7 @@ namespace NinjaPuzzle.Code.Gameplay
 		public EventManager EventManager { get; private set; }
 		public TimeManager TimeManager { get; private set; }
 		public PlayerManager PlayerManager { get; private set; }
+		public InventoryManager InventoryManager { get; private set; }
 
 		public bool IsInitialized { get; private set; }
 
@@ -19,6 +21,7 @@ namespace NinjaPuzzle.Code.Gameplay
 			GameInstance = gameInstance;
 			RuntimeData = new RuntimeData(gameSaveData);
 			
+			InventoryManager = new InventoryManager(this);
 			EventManager = new EventManager(this);
 			TimeManager = new TimeManager(this);
 			PlayerManager = new PlayerManager(this);
