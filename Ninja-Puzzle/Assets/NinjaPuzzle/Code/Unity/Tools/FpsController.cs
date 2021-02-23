@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using NinjaPuzzle.Code.Unity.GameSetup;
+using NinjaPuzzle.Code.Unity.Managers;
+using UnityEngine;
 
 namespace NinjaPuzzle.Code.Unity.Tools
 {
@@ -18,8 +21,15 @@ namespace NinjaPuzzle.Code.Unity.Tools
 		private CharacterController m_characterController;
 		private Vector3 m_moveDirection = Vector3.zero;
 		private float m_rotationX;
+		
+		private InputManager m_inputManager;
 
 		[HideInInspector] public bool canMove = true;
+
+		private void Awake()
+		{
+			m_inputManager = NinjaPuzzleApp.Instance.UnityGameInstance.InputManager;
+		}
 
 		void Start()
 		{
@@ -36,13 +46,13 @@ namespace NinjaPuzzle.Code.Unity.Tools
 			Vector3 forward = transform.TransformDirection(Vector3.forward);
 			Vector3 right = transform.TransformDirection(Vector3.right);
 			// Press Left Shift to run
-			bool isRunning = Input.GetKey(KeyCode.LeftShift);
-			float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
-			float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
+			bool isRunning = m_inputManager.Events[EButtonEvent.OnRun].IsPressed;
+			float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * m_inputManager.Axis.y : 0;
+			float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) *  m_inputManager.Axis.x : 0;
 			float movementDirectionY = m_moveDirection.y;
 			m_moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-			if (Input.GetButton("Jump") && canMove && m_characterController.isGrounded)
+			if (m_inputManager.Events[EButtonEvent.OnJump].IsPressed && canMove && m_characterController.isGrounded)
 			{
 				m_moveDirection.y = jumpSpeed;
 			}
@@ -65,10 +75,10 @@ namespace NinjaPuzzle.Code.Unity.Tools
 			// Player and Camera rotation
 			if (canMove)
 			{
-				m_rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+				m_rotationX += -m_inputManager.AxisMouse.y * lookSpeed;
 				m_rotationX = Mathf.Clamp(m_rotationX, -lookXLimit, lookXLimit);
 				playerCamera.transform.localRotation = Quaternion.Euler(m_rotationX, 0, 0);
-				transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+				transform.rotation *= Quaternion.Euler(0, m_inputManager.AxisMouse.x * lookSpeed, 0);
 			}
 		}
 	}

@@ -8,7 +8,7 @@ namespace NinjaPuzzle.Code.Unity.Player
 	{
 		private InputManager m_inputManager;
 
-		private void Start()
+		private void Awake()
 		{
 			m_inputManager = NinjaPuzzleApp.Instance.UnityGameInstance.InputManager;
 			m_inputManager.Events[EButtonEvent.OnFire1].Event += Fire1;
