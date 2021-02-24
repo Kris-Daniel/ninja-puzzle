@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="/Assets/NinjaPuzzle/Code/UI/Styles/Style.uss" />
+    <ui:VisualElement class="main-menu-page">
+        <ui:VisualElement class="main-menu">
+            <ui:Button name="play-btn" class="main-menu_btn">
+                <ui:TextElement text="Play Game" class="green" />
+            </ui:Button>
+            <ui:Button name="exit-btn" class="main-menu_btn">
+                <ui:TextElement text="Exit Game" class="green" />
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,24 +1,29 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 namespace NinjaPuzzle.Code.Unity.UI
 {
 	public class StartScreen : MonoBehaviour
 	{
-		[SerializeField] private Button startButton;
-		[SerializeField] private Button exitButton;
+		private UIDocument m_uiDocument;
 
 		private void Awake()
 		{
-			InitButtonActions();
+			m_uiDocument = GetComponent<UIDocument>();
+			InitButtons();
 		}
 
-		void InitButtonActions()
+		void InitButtons()
 		{
-			startButton.onClick.AddListener(() => SceneManager.LoadScene(1));
+			Button btnPlay = m_uiDocument.rootVisualElement.Q<Button>("play-btn");
+			btnPlay.clicked += () => SceneManager.LoadScene(1);
 			
-			exitButton.onClick.AddListener(Application.Quit);
+			Button btnExit = m_uiDocument.rootVisualElement.Q<Button>("play-btn");
+			btnExit.clicked += Application.Quit;
+			
+			print(btnPlay.hierarchy.Children().ToList()[0]);
 		}
 	}
 }
