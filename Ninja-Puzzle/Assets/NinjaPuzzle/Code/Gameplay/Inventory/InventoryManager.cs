@@ -19,7 +19,14 @@ namespace NinjaPuzzle.Code.Gameplay.Inventory
 			
 			foreach (var inventoryStack in Inventory.Items)
 			{
-				Debug.Log(inventoryStack.ItemData.ItemType + " = " + inventoryStack.Count);
+				if (inventoryStack != null)
+				{
+					Debug.Log(inventoryStack.ItemData.ItemType + " = " + inventoryStack.Count);
+				}
+				else
+				{
+					Debug.Log(null);
+				}
 			}
 		}
 
@@ -29,7 +36,7 @@ namespace NinjaPuzzle.Code.Gameplay.Inventory
 			{
 				{EItem.Katana, 1},
 				{EItem.Kunai, 1},
-				{EItem.ShurikenAttract, 2},
+				{EItem.ShurikenAttract, 5},
 				{EItem.ShurikenRepel, 2}
 			};
 			
