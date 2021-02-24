@@ -1,4 +1,6 @@
-﻿namespace NinjaPuzzle.Code.Unity.Inventory
+﻿using NinjaPuzzle.Code.Unity.ScriptableObjects.Inventory;
+
+namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 {
 	public class Item
 	{

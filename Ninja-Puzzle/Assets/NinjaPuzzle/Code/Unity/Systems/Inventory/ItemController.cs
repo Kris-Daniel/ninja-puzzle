@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NinjaPuzzle.Code.Unity.Inventory
+namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 {
 	public class ItemController : MonoBehaviour
 	{

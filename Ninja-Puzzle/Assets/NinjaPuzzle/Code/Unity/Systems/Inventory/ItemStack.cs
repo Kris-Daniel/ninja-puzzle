@@ -1,7 +1,7 @@
-﻿using NinjaPuzzle.Code.Unity.Inventory;
+﻿using NinjaPuzzle.Code.Unity.ScriptableObjects.Inventory;
 using UnityEngine;
 
-namespace NinjaPuzzle.Code.Gameplay.Inventory
+namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 {
 	public class ItemStack
 	{
@@ -11,7 +11,7 @@ namespace NinjaPuzzle.Code.Gameplay.Inventory
 		public ItemStack(ItemData itemData, uint count = 1)
 		{
 			ItemData = itemData;
-			Count = (int) count;
+			Count = Mathf.Clamp((int) count, 0, ItemData.MaxItemsInStack);
 		}
  
 		public int Add(uint count)

@@ -1,43 +1,62 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using NinjaPuzzle.Code.Unity.Inventory;
+using NinjaPuzzle.Code.Unity.ScriptableObjects.Inventory;
 
-namespace NinjaPuzzle.Code.Gameplay.Inventory
+namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 {
 	public class Inventory
 	{
-		private const int MaxStacks = 16;
-		//public List<ItemStack> Items = new List<ItemStack>();
-		public ItemStack[] Items = new ItemStack[MaxStacks];
+		public ItemStack[] Stacks { get; private set; }
+
+		public Inventory(int maxStacks)
+		{
+			Stacks = new ItemStack[maxStacks];
+		}
+
+#region Public Methods
+
+		public void Clear()
+		{
+			Stacks = new ItemStack[Stacks.Length];
+		}
 
 		public ItemStack SafeAddToIndex(ItemStack itemStack, int stackIndex)
 		{
-			if (Items[stackIndex].ItemData == itemStack.ItemData)
+			if (stackIndex < Stacks.Length)
 			{
-				int itemRemains = Items[stackIndex].Add((uint)itemStack.Count);
-				return new ItemStack(itemStack.ItemData, (uint) itemRemains);
+				if (Stacks[stackIndex] == null)
+				{
+					Stacks[stackIndex] = itemStack;
+					return null;
+				}
+				if (Stacks[stackIndex].ItemData == itemStack.ItemData)
+				{
+					int itemRemains = Stacks[stackIndex].Add((uint)itemStack.Count);
+					return new ItemStack(itemStack.ItemData, (uint) itemRemains);
+				}
 			}
-			return null;
+			
+			return itemStack;
 		}
 		
 		public ItemStack SafeUseFromIndex(int stackIndex)
 		{
-			ItemStack itemStack = Items[stackIndex];
-			Items[stackIndex] = null;
+			ItemStack itemStack = Stacks[stackIndex];
+			Stacks[stackIndex] = null;
 			return itemStack;
 		}
 
-		public bool SafeAdd(ItemData itemData, uint count)
+		public List<ItemData> SafeAdd(ItemData itemData, uint count)
 		{
-			bool canAdd = true;
+			List<ItemData> remainsItems = new List<ItemData>();
 
 			ItemStack foundedStack = null;
 			
 			int stackIndex = FindNotFilledStack(itemData);
-
+			
 			if (stackIndex > -1)
 			{
-				foundedStack = Items[stackIndex];
+				foundedStack = Stacks[stackIndex];
 			}
 
 			if (foundedStack != null)
@@ -46,14 +65,14 @@ namespace NinjaPuzzle.Code.Gameplay.Inventory
 				if (itemRemains > 0)
 				{
 					int freeIndex = GetFreeIndex();
-					if (GetStacksCount() < MaxStacks && freeIndex > -1)
+					if (GetStacksCount() < Stacks.Length && freeIndex > -1)
 					{
-						Items[freeIndex] = new ItemStack(itemData, 0);
+						Stacks[freeIndex] = new ItemStack(itemData, 0);
 					}
 					return SafeAdd(itemData, (uint) itemRemains);
 				}
 			}
-			else if (GetStacksCount() < MaxStacks)
+			else if (GetStacksCount() < Stacks.Length)
 			{
 				ItemStack newStack = new ItemStack(itemData, 0);
 				int itemRemains = newStack.Add(count);
@@ -61,7 +80,7 @@ namespace NinjaPuzzle.Code.Gameplay.Inventory
 				int freeIndex = GetFreeIndex();
 				if (freeIndex > -1)
 				{
-					Items[freeIndex] = newStack;
+					Stacks[freeIndex] = newStack;
 				}
 				
 				if (itemRemains > 0)
@@ -71,10 +90,10 @@ namespace NinjaPuzzle.Code.Gameplay.Inventory
 			}
 			else
 			{
-				canAdd = false;
+				remainsItems.AddRange(Enumerable.Repeat(itemData, (int)count).ToList());
 			}
 
-			return canAdd;
+			return remainsItems;
 		}
 
 		public List<ItemData> SafeUse(ItemData itemData, uint count)
@@ -85,12 +104,12 @@ namespace NinjaPuzzle.Code.Gameplay.Inventory
 			
 			if (stackIndex > -1)
 			{
-				ItemStack foundedStack = Items[stackIndex];
+				ItemStack foundedStack = Stacks[stackIndex];
 				int itemRemains = foundedStack.Get(count);
 				
 				if (itemRemains > 0 || itemRemains < 0)
 				{
-					Items[stackIndex] = null;
+					Stacks[stackIndex] = null;
 				}
 
 				if (itemRemains > 0)
@@ -106,17 +125,21 @@ namespace NinjaPuzzle.Code.Gameplay.Inventory
 
 			return itemsToUse;
 		}
+		
+#endregion
+
+#region Helper Methods
 
 		private int GetStacksCount()
 		{
-			return Items.Count(t => t != null);
+			return Stacks.Count(t => t != null);
 		}
 
 		private int GetFreeIndex()
 		{
-			for (int i = 0; i < Items.Length; i++)
+			for (int i = 0; i < Stacks.Length; i++)
 			{
-				if (Items[i] == null)
+				if (Stacks[i] == null)
 				{
 					return i;
 				}
@@ -127,9 +150,9 @@ namespace NinjaPuzzle.Code.Gameplay.Inventory
 
 		private int FindStackIndex(ItemData itemData)
 		{
-			for (var i = 0; i < Items.Length; i++)
+			for (var i = 0; i < Stacks.Length; i++)
 			{
-				if (Items[i] != null && Items[i].ItemData == itemData)
+				if (Stacks[i] != null && Stacks[i].ItemData == itemData)
 				{
 					return i;
 				}
@@ -140,9 +163,9 @@ namespace NinjaPuzzle.Code.Gameplay.Inventory
 
 		private int FindNotFilledStack(ItemData itemData)
 		{
-			for (int i = 0; i < Items.Length; i++)
+			for (int i = 0; i < Stacks.Length; i++)
 			{
-				if (Items[i] != null && Items[i].ItemData == itemData && Items[i].Count < itemData.MaxItemsInStack)
+				if (Stacks[i] != null && Stacks[i].ItemData == itemData && Stacks[i].Count < itemData.MaxItemsInStack)
 				{
 					return i;
 				}
@@ -150,5 +173,7 @@ namespace NinjaPuzzle.Code.Gameplay.Inventory
 
 			return -1;
 		}
+
+#endregion
 	}
 }

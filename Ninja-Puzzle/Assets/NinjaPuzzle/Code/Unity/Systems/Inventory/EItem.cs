@@ -1,4 +1,4 @@
-﻿namespace NinjaPuzzle.Code.Gameplay.Inventory
+﻿namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 {
 	public enum EItem
 	{
