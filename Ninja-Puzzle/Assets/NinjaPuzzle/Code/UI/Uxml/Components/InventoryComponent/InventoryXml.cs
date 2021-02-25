@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NinjaPuzzle.Code.UI.Uxml.Components.ItemCellComponent;
 using NinjaPuzzle.Code.UI.Uxml.Mixins;
+using NinjaPuzzle.Code.Unity.Managers;
 using NinjaPuzzle.Code.Unity.Systems.Inventory;
 using UnityEngine.UIElements;
 
@@ -14,13 +15,22 @@ namespace NinjaPuzzle.Code.UI.Uxml.Components.InventoryComponent
 		
 		public InventoryXml(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement)
 		{
-			xmlElement.AddToClassList("hide");
+			XmlElement.AddToClassList("hide");
+			UnityGameInstance.InputManager.Events[EButtonEvent.OnInventory].Event += ToggleInventory;
 			
 			//Init item cells
-			var visualItemCells = xmlElement.Query<VisualElement>("item-cell").ToList();
+			var visualItemCells = XmlElement.Query<VisualElement>("item-cell").ToList();
 			foreach (var visualItemCell in visualItemCells)
 			{
 				ItemCells.Add(new ItemCellXml(this, visualItemCell));
+			}
+		}
+
+		private void ToggleInventory(EEventStage eventStage)
+		{
+			if (eventStage == EEventStage.Down)
+			{
+				XmlElement.ToggleInClassList("hide");
 			}
 		}
 
