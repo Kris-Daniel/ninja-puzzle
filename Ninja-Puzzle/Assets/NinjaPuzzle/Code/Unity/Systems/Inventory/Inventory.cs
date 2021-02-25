@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NinjaPuzzle.Code.Unity.ScriptableObjects.Inventory;
 
@@ -7,6 +8,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 	public class Inventory
 	{
 		public ItemStack[] Stacks { get; private set; }
+		public Action OnChange;
 
 		public Inventory(int maxStacks)
 		{
@@ -18,6 +20,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 		public void Clear()
 		{
 			Stacks = new ItemStack[Stacks.Length];
+			OnChange?.Invoke();
 		}
 
 		public ItemStack SafeAddToIndex(ItemStack itemStack, int stackIndex)
@@ -36,6 +39,8 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 				}
 			}
 			
+			OnChange?.Invoke();
+			
 			return itemStack;
 		}
 		
@@ -43,10 +48,17 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 		{
 			ItemStack itemStack = Stacks[stackIndex];
 			Stacks[stackIndex] = null;
+			OnChange?.Invoke();
 			return itemStack;
 		}
 
 		public List<ItemData> SafeAdd(ItemData itemData, uint count)
+		{
+			OnChange?.Invoke();
+			return SafeAddRecursive(itemData, count);
+		}
+
+		private List<ItemData> SafeAddRecursive(ItemData itemData, uint count)
 		{
 			List<ItemData> remainsItems = new List<ItemData>();
 
@@ -69,7 +81,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 					{
 						Stacks[freeIndex] = new ItemStack(itemData, 0);
 					}
-					return SafeAdd(itemData, (uint) itemRemains);
+					return SafeAddRecursive(itemData, (uint) itemRemains);
 				}
 			}
 			else if (GetStacksCount() < Stacks.Length)
@@ -85,7 +97,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 				
 				if (itemRemains > 0)
 				{
-					return SafeAdd(itemData, (uint) itemRemains);
+					return SafeAddRecursive(itemData, (uint) itemRemains);
 				}
 			}
 			else
@@ -97,6 +109,12 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 		}
 
 		public List<ItemData> SafeUse(ItemData itemData, uint count)
+		{
+			OnChange?.Invoke();
+			return SafeAddRecursive(itemData, count);
+		}
+
+		private List<ItemData> SafeUseRecursive(ItemData itemData, uint count)
 		{
 			List<ItemData> itemsToUse = new List<ItemData>();
 			
@@ -115,7 +133,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 				if (itemRemains > 0)
 				{
 					itemsToUse.AddRange(Enumerable.Repeat(itemData, (int)(count - itemRemains)).ToList());
-					itemsToUse.AddRange(SafeUse(itemData, (uint) itemRemains));
+					itemsToUse.AddRange(SafeUseRecursive(itemData, (uint) itemRemains));
 				}
 				else
 				{

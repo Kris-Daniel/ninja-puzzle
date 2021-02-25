@@ -1,0 +1,21 @@
+﻿<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+
+    <ui:VisualElement class="item-cell rel" name="item-cell">
+        <ui:VisualElement class="item-cell_square"/>
+
+        <ui:VisualElement class="abs-center">
+
+            <ui:VisualElement class="rel text-center">
+
+                <ui:Image class="item-cell_icon" name="item-icon" />
+
+                <ui:TextElement class="item-cell_text" name="item-cell_name" text="" />
+
+                <ui:TextElement class="item-cell_count" name="item-cell_count" text=""/>
+
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+    </ui:VisualElement>
+
+</ui:UXML>

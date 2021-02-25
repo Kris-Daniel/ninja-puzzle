@@ -1,0 +1,11 @@
+<UXML xmlns="UnityEngine.UIElements">
+    <VisualElement class="hotbar">
+        <VisualElement class="hotbar-band">
+            
+            <VisualElement class="hotbar-item">
+                
+            </VisualElement>
+            
+        </VisualElement>
+    </VisualElement>
+</UXML>

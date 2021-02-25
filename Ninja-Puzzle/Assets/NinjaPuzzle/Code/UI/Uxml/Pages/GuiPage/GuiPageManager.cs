@@ -2,45 +2,42 @@
 using NinjaPuzzle.Code.Unity.Systems.Inventory;
 using UnityEngine.UIElements;
 
-namespace NinjaPuzzle.Code.Unity.UI
+namespace NinjaPuzzle.Code.UI.Uxml.Pages.GuiPage
 {
-	public class GuiScreen : AUnityMonoManager
+	public class GuiPageManager : AUnityMonoManager
 	{
 		private UIDocument m_uiDocument;
-		private VisualElement m_inventory;
+		private GuiPageXml m_guiPageXml;
 
 		protected override void Awake()
 		{
 			base.Awake();
 			m_uiDocument = GetComponent<UIDocument>();
-			m_inventory = m_uiDocument.rootVisualElement.Q<VisualElement>("inventory");
-			UnityGameInstance.InputManager.Events[EButtonEvent.OnInventory].Event += ToggleInventory;
+			/*UnityGameInstance.InputManager.Events[EButtonEvent.OnInventory].Event += ToggleInventory;*/
 		}
 
-		private void ToggleInventory(EEventStage eventStage)
+		private void Start()
 		{
-			if (eventStage == EEventStage.Down)
-			{
-				m_inventory.ToggleInClassList("hide");
-			}
+			m_guiPageXml = new GuiPageXml(null, m_uiDocument.rootVisualElement.Q("gui-page"), this);
 		}
 
 		public void DrawInventory(Inventory inventory)
 		{
-			var cells = m_inventory.Query<VisualElement>("inventory-item").ToList();
-			
+			/*var cells = m_inventory.Query<VisualElement>("inventory-item").ToList();
+
 			for (var i = 0; i < inventory.Stacks.Length; i++)
 			{
 				if (inventory.Stacks[i] != null)
 				{
 					var itemText = cells[i].Q<TextElement>("item-text");
 					itemText.text = inventory.Stacks[i].ItemData.ItemName;
-					
+
 					var itemCount = cells[i].Q<TextElement>("item-count");
 					itemCount.text = inventory.Stacks[i].Count.ToString();
 				}
 			}
-			print("Draw");
+
+			print("Draw");*/
 		}
 	}
 }
