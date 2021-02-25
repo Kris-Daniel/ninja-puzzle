@@ -1,0 +1,12 @@
+.main-menu_btn {
+    padding: 20px;
+    width: auto;
+    margin: 40px;
+}
+
+.aim {
+    height: 400px;
+    width: 400px;
+    border-radius: 200px;
+    background-color: #000;
+}

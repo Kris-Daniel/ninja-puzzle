@@ -1,0 +1,17 @@
+.main-menu-page {
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-menu {
+    border-color: aqua;
+    border-width: 2px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.gui-page{
+}

@@ -2,11 +2,11 @@
     <Style src="/Assets/NinjaPuzzle/Code/UI/Styles/Style.uss" />
     <ui:VisualElement class="main-menu-page">
         <ui:VisualElement class="main-menu">
-            <ui:Button name="play-btn" class="main-menu_btn">
-                <ui:TextElement text="Play Game" class="green" />
+            <ui:Button name="play-btn" class="main-menu_btn bg-yellow">
+                <ui:TextElement text="Play Game" class="red" />
             </ui:Button>
-            <ui:Button name="exit-btn" class="main-menu_btn">
-                <ui:TextElement text="Exit Game" class="green" />
+            <ui:Button name="exit-btn" class="main-menu_btn bg-yellow">
+                <ui:TextElement text="Exit Game" class="red" />
             </ui:Button>
         </ui:VisualElement>
     </ui:VisualElement>

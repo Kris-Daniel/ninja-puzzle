@@ -12,7 +12,7 @@ namespace NinjaPuzzle.Code.Unity.UI
 		private void Awake()
 		{
 			m_uiDocument = GetComponent<UIDocument>();
-			InitButtons();
+			//InitButtons();
 		}
 
 		void InitButtons()
