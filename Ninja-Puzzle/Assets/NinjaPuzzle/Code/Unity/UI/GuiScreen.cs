@@ -19,7 +19,7 @@ namespace NinjaPuzzle.Code.Unity.UI
 
 		private void ToggleInventory(EEventStage eventStage)
 		{
-			if (eventStage == EEventStage.Click)
+			if (eventStage == EEventStage.Down)
 			{
 				m_inventory.ToggleInClassList("hide");
 			}
