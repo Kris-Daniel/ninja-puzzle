@@ -25,6 +25,11 @@ VisualElement {}
     border-radius: 8px;
 }
 
+.item-cell--drag{
+    position: absolute !important;
+    width: 100%;
+}
+
 .item-cell_square{
     padding-top: 100%;
 }

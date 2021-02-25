@@ -7,6 +7,8 @@ namespace NinjaPuzzle.Code.UI.Uxml.Components.ItemCellComponent
 	{
 		private readonly TextElement m_name;
 		private readonly TextElement m_counter;
+
+		public int Index;
 		
 		public ItemCellXml(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement)
 		{
@@ -14,7 +16,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Components.ItemCellComponent
 			m_counter = xmlElement.Q<TextElement>("item-cell_count");
 		}
 
-		public void Render(string name, int count)
+		public void SetData(string name, int count)
 		{
 			m_name.text = name;
 			m_counter.text = count.ToString();

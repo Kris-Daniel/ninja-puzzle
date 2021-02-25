@@ -1,6 +1,7 @@
 ﻿<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
 
     <ui:VisualElement class="item-cell rel" name="item-cell">
+        <ui:VisualElement class="rel">
         <ui:VisualElement class="item-cell_square"/>
 
         <ui:VisualElement class="abs-center">
@@ -15,6 +16,7 @@
 
             </ui:VisualElement>
 
+        </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 
