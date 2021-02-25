@@ -1,4 +1,5 @@
-﻿using NinjaPuzzle.Code.Gameplay;
+﻿using System.Collections.Generic;
+using NinjaPuzzle.Code.Gameplay;
 using NinjaPuzzle.Code.Unity.Managers;
 
 namespace NinjaPuzzle.Code.Unity.GameSetup
@@ -11,6 +12,7 @@ namespace NinjaPuzzle.Code.Unity.GameSetup
 		public VfxManager VfxManager { get; private set; }
 		public InputManager InputManager { get; private set; }
 		public InventoryManager InventoryManager { get; private set; }
+		public List<AUnityMonoManager> MonoManagers { get; private set; } = new List<AUnityMonoManager>();
 
 		public UnityGameInstance()
 		{
@@ -24,6 +26,11 @@ namespace NinjaPuzzle.Code.Unity.GameSetup
 		public void CreateGameInstance()
 		{
 			Game = new GameInstance(GameSaveManager.CurrentGameSave);
+		}
+
+		public T GetUnityMonoManager<T>() where T : AUnityMonoManager
+		{
+			return (T) MonoManagers.Find(manager => manager.GetType() == typeof(T));
 		}
 
 		public void Update()

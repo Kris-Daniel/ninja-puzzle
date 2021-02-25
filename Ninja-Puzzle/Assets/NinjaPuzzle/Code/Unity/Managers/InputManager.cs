@@ -22,7 +22,8 @@ namespace NinjaPuzzle.Code.Unity.Managers
 		OnWeapon1  = 1 << 3,
 		OnWeapon2  = 1 << 4,
 		OnRun      = 1 << 5,
-		OnJump     = 1 << 6
+		OnJump     = 1 << 6,
+		OnInventory = 1 << 7
 	}
 	
 	public class EventData
@@ -47,7 +48,8 @@ namespace NinjaPuzzle.Code.Unity.Managers
 			{EButtonEvent.OnWeapon1, KeyCode.Q},
 			{EButtonEvent.OnWeapon2, KeyCode.E},
 			{EButtonEvent.OnRun, KeyCode.LeftShift},
-			{EButtonEvent.OnJump, KeyCode.Space}
+			{EButtonEvent.OnJump, KeyCode.Space},
+			{EButtonEvent.OnInventory, KeyCode.Tab}
 		};
 		
 		private const float HoldDurationDelta = 0.3f;
