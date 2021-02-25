@@ -4,6 +4,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .column-center{
@@ -35,6 +37,8 @@
     height: 100%;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .abs-x-center{
@@ -54,6 +58,11 @@
 .w100{
     width: 100%;
 }
+
+.wauto{
+    width: auto;
+}
+
 .h100{
     height: 100%;
 }

@@ -1,5 +1,28 @@
 VisualElement {}
 
 .inventory{
-    
+    width: 650px;
+}
+
+.inventory_top{
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.inventory-cell-grid{
+    width: 20%;
+    padding: 10px;
+}
+
+.inventory-cell{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.inventory-cell_square{
+    padding-top: 100%;
 }

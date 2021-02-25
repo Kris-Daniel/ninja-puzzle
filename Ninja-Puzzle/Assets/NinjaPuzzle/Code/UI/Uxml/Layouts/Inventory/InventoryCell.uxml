@@ -1,0 +1,22 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+
+    
+    <ui:VisualElement class="inventory-cell rel" name="inventory-cell">
+        <ui:VisualElement class="inventory-cell_square"/>
+        
+        <ui:VisualElement class="abs-center">
+            
+            <ui:VisualElement class="rel text-center">
+                
+                <ui:Image class="inventory-cell_icon" name="item-icon" />
+                
+                <ui:TextElement class="inventory-cell_text" name="item-text" text="Sword" />
+                
+                <ui:TextElement class="inventory-cell_count" text="2"/>
+                
+            </ui:VisualElement>
+            
+        </ui:VisualElement>
+    </ui:VisualElement>
+    
+</ui:UXML>

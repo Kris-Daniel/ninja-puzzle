@@ -5,8 +5,8 @@
 }
 
 .aim {
-    height: 400px;
-    width: 400px;
-    border-radius: 200px;
+    height: 4px;
+    width: 4px;
+    border-radius: 2px;
     background-color: #000;
 }

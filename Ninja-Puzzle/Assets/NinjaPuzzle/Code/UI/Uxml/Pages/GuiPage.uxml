@@ -1,10 +1,14 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="inventory-t" src="/Assets/NinjaPuzzle/Code/UI/Uxml/Layouts/Inventory.uxml" />
+    <ui:Template name="inventory-t" src="/Assets/NinjaPuzzle/Code/UI/Uxml/Layouts/Inventory/Inventory.uxml" />
+    
     <Style src="/Assets/NinjaPuzzle/Code/UI/Styles/Style.uss" />
-    <ui:VisualElement class="gui-page height-full rel">
+    <ui:VisualElement class="gui-page h100 rel">
         <ui:VisualElement class="abs-center">
             <ui:VisualElement class="aim" />
         </ui:VisualElement>
+        <ui:VisualElement class="abs-center">
+            <ui:Instance template="inventory-t" />
+        </ui:VisualElement>
     </ui:VisualElement>
-    <ui:Instance template="inventory-t" />
+    
 </ui:UXML>
