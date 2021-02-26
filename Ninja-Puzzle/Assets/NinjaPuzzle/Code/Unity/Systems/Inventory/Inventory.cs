@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using NinjaPuzzle.Code.Unity.ScriptableObjects.Inventory;
 using UnityEngine;
 
@@ -59,7 +60,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 
 		public List<ItemData> SafeAdd(ItemData itemData, uint count)
 		{
-			OnChange?.Invoke();
+			DOVirtual.DelayedCall(0, () => OnChange?.Invoke());
 			return SafeAddRecursive(itemData, count);
 		}
 
@@ -115,7 +116,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 
 		public List<ItemData> SafeUse(ItemData itemData, uint count)
 		{
-			OnChange?.Invoke();
+			DOVirtual.DelayedCall(0, () => OnChange?.Invoke());
 			return SafeAddRecursive(itemData, count);
 		}
 
