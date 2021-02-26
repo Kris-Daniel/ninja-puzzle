@@ -2,9 +2,10 @@
     
     <Template name="cell-t" src="../ItemCellComponent/ItemCell.uxml" />
     
-    <VisualElement class="inventory" name="inventory">
-        <VisualElement class="inventory_top">
-
+    <VisualElement class="inventory rel" name="inventory">
+        <VisualElement name="inventory-drag-parent" class="rel"/>
+        
+        <VisualElement name="inventory_top" class="inventory_top">
             <Instance template="cell-t" class="inventory-grid" />
             <Instance template="cell-t" class="inventory-grid" />
             <Instance template="cell-t" class="inventory-grid" />

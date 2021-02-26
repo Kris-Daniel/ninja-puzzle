@@ -16,20 +16,35 @@ VisualElement {}
 
 .inventory-grid{
     width: 20%;
-    padding: 10px;
+    padding: 12px;
 }
 
 /* Item Cell */
-.item-cell{
+.item-cell {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 8px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .item-cell--drag{
     position: absolute !important;
-    width: 100%;
+    width: 100px;
+    height: 200px;
 }
 
 .item-cell_square{
     padding-top: 100%;
+}
+
+.item-cell_count{
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.item-cell-bed{
+    position: relative;
 }

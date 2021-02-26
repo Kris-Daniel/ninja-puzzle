@@ -3,8 +3,9 @@ using UnityEngine;
 
 namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 {
-	public class ItemStack
+	public struct ItemStack
 	{
+		
 		public ItemData ItemData { get; private set; }
 		public int Count { get; private set; }
 

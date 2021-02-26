@@ -14,6 +14,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 			Parent = parent;
 			XmlElement = xmlElement;
 			UnityGameInstance = NinjaPuzzleApp.Instance.UnityGameInstance;
+			XmlElement.SaveXmlController(this);
 		}
 	}
 }

@@ -27,10 +27,10 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 		{
 			if (stackIndex < Stacks.Length)
 			{
-				if (Stacks[stackIndex] == null)
+				if (Stacks[stackIndex].ItemData)
 				{
 					Stacks[stackIndex] = itemStack;
-					return null;
+					return new ItemStack();
 				}
 				if (Stacks[stackIndex].ItemData == itemStack.ItemData)
 				{
@@ -47,7 +47,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 		public ItemStack SafeUseFromIndex(int stackIndex)
 		{
 			ItemStack itemStack = Stacks[stackIndex];
-			Stacks[stackIndex] = null;
+			Stacks[stackIndex] = new ItemStack();
 			OnChange?.Invoke();
 			return itemStack;
 		}
@@ -62,7 +62,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 		{
 			List<ItemData> remainsItems = new List<ItemData>();
 
-			ItemStack foundedStack = null;
+			ItemStack foundedStack = new ItemStack();
 			
 			int stackIndex = FindNotFilledStack(itemData);
 			
@@ -71,7 +71,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 				foundedStack = Stacks[stackIndex];
 			}
 
-			if (foundedStack != null)
+			if (foundedStack.ItemData)
 			{
 				int itemRemains = foundedStack.Add(count);
 				if (itemRemains > 0)
@@ -127,7 +127,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 				
 				if (itemRemains > 0 || itemRemains < 0)
 				{
-					Stacks[stackIndex] = null;
+					Stacks[stackIndex] = new ItemStack();
 				}
 
 				if (itemRemains > 0)
@@ -150,14 +150,14 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 
 		private int GetStacksCount()
 		{
-			return Stacks.Count(t => t != null);
+			return Stacks.Count(t => t.ItemData != null);
 		}
 
 		private int GetFreeIndex()
 		{
 			for (int i = 0; i < Stacks.Length; i++)
 			{
-				if (Stacks[i] == null)
+				if (Stacks[i].ItemData == null)
 				{
 					return i;
 				}
@@ -170,7 +170,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 		{
 			for (var i = 0; i < Stacks.Length; i++)
 			{
-				if (Stacks[i] != null && Stacks[i].ItemData == itemData)
+				if (Stacks[i].ItemData && Stacks[i].ItemData == itemData)
 				{
 					return i;
 				}
@@ -183,7 +183,7 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 		{
 			for (int i = 0; i < Stacks.Length; i++)
 			{
-				if (Stacks[i] != null && Stacks[i].ItemData == itemData && Stacks[i].Count < itemData.MaxItemsInStack)
+				if (Stacks[i].ItemData && Stacks[i].ItemData == itemData && Stacks[i].Count < itemData.MaxItemsInStack)
 				{
 					return i;
 				}

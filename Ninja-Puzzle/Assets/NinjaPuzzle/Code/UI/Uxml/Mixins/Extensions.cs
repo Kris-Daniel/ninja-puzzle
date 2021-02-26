@@ -1,23 +1,49 @@
-﻿using UnityEngine.UIElements;
+﻿using System.Linq;
+using UnityEngine.UIElements;
 
 namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 {
 	public static class Extensions
 	{
-		public static VisualElement ClosestParent(this VisualElement xmlElement, string parentName, int count = 0)
+		public static VisualElement ClosestParent(this VisualElement xmlElement, string parentName)
 		{
-			while (xmlElement != null && xmlElement.name != parentName && count < 10)
+			while (xmlElement.parent != null && xmlElement.name != parentName)
 			{
 				xmlElement = xmlElement.parent;
-				count++;
 			}
 
-			if (xmlElement == null || count >= 10)
+			if (xmlElement.parent == null)
 			{
 				return null;
 			}
 
 			return xmlElement;
+		}
+		
+		public static VisualElement GetRootElement(this VisualElement xmlElement)
+		{
+			while (xmlElement.parent != null)
+			{
+				xmlElement = xmlElement.parent;
+			}
+			
+			return xmlElement.Children().ToList()[0];
+		}
+		
+		public static AXmlController GetRootController(this AXmlController xmlController)
+		{
+			while (xmlController.Parent != null)
+			{
+				xmlController = xmlController.Parent;
+			}
+			
+			return xmlController;
+		}
+
+		public static void SaveXmlController(this VisualElement xmlElement, AXmlController xmlController)
+		{
+			var root = (PageXml) xmlController.GetRootController();
+			root.XmlControllersByVisualElement.Add(xmlElement, xmlController);
 		}
 	}
 }

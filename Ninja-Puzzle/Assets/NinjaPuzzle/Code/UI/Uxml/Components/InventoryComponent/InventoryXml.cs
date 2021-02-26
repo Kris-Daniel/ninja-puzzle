@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using NinjaPuzzle.Code.UI.Uxml.Components.ItemCellComponent;
 using NinjaPuzzle.Code.UI.Uxml.Mixins;
 using NinjaPuzzle.Code.Unity.Managers;
@@ -12,21 +12,16 @@ namespace NinjaPuzzle.Code.UI.Uxml.Components.InventoryComponent
 	{
 		public Inventory Inventory { get; private set; }
 		
-		public List<ItemCellXml> ItemCells { get; private set; } = new List<ItemCellXml>();
+		private VisualElement m_inventoryTop;
+		private VisualTreeAsset m_cellTemplate;
 		
 		public InventoryXml(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement)
 		{
 			XmlElement.AddToClassList("hide");
 			UnityGameInstance.InputManager.Events[EButtonEvent.OnInventory].Event += ToggleInventory;
-			
-			//Init item cells
-			var visualItemCells = XmlElement.Query<VisualElement>("item-cell").ToList();
-			foreach (var visualItemCell in visualItemCells)
-			{
-				ItemCells.Add(new ItemCellXml(this, visualItemCell));
-			}
-			
-			RegisterCallbacks();
+
+			m_inventoryTop = XmlElement.Q("inventory_top");
+			m_cellTemplate = PathStore.GetTemplate("Components/ItemCellComponent/ItemCell");
 		}
 
 		private void ToggleInventory(EEventStage eventStage)
@@ -46,55 +41,21 @@ namespace NinjaPuzzle.Code.UI.Uxml.Components.InventoryComponent
 
 		void SetItemCellsData()
 		{
+			m_inventoryTop.Clear();
 			for (int i = 0; i < Inventory.Stacks.Length; i++)
 			{
-				if (Inventory.Stacks[i] != null)
+				VisualElement grid = new VisualElement();
+				grid.AddToClassList("inventory-grid");
+
+				if (Inventory.Stacks[i].ItemData)
 				{
-					ItemCells[i].SetData(Inventory.Stacks[i].ItemData.ItemName, Inventory.Stacks[i].Count);
+					VisualElement itemCell = m_cellTemplate.CloneTree(); //template
+					grid.Add(itemCell);
+					var itemCellXml = new ItemCellXml(this, itemCell, Inventory.Stacks[i], Inventory);
+					itemCellXml.XmlElement.viewDataKey = i.ToString();
 				}
-
-				ItemCells[i].Index = i;
-			}
-		}
-		
-		void RegisterCallbacks()
-		{
-			XmlElement.RegisterCallback<PointerDownEvent>(OnPointerDown);
-			XmlElement.RegisterCallback<PointerMoveEvent>(OnPointerMove);
-			XmlElement.RegisterCallback<PointerUpEvent>(OnPointerUp);
-		}
-
-		private VisualElement m_currentItemCell;
-		private Vector2 m_dragStartPos;
-		
-		private void OnPointerDown(PointerDownEvent evt)
-		{
-			var target = (VisualElement) evt.target;
-
-			m_currentItemCell = target.ClosestParent("item-cell");
-
-			m_currentItemCell?.AddToClassList("item-cell--drag");
-
-			m_dragStartPos = evt.position;
-		}
-
-		private void OnPointerMove(PointerMoveEvent evt)
-		{
-			if (m_currentItemCell != null)
-			{
-				m_currentItemCell.style.left = evt.position.x - m_dragStartPos.x;
-				m_currentItemCell.style.top = evt.position.y - m_dragStartPos.y;
-			}
-		}
-
-		private void OnPointerUp(PointerUpEvent evt)
-		{
-			if (m_currentItemCell != null)
-			{
-				m_currentItemCell.style.left = 0;
-				m_currentItemCell.style.top = 0;
-				m_currentItemCell?.RemoveFromClassList("item-cell--drag");
-				m_currentItemCell = null;
+				
+				m_inventoryTop.Add(grid);
 			}
 		}
 	}
