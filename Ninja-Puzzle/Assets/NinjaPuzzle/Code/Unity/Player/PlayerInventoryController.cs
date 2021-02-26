@@ -11,11 +11,6 @@ namespace NinjaPuzzle.Code.Unity.Player
 			base.Awake();
 			UnityGameInstance.InputManager.Events[EButtonEvent.OnInventory].Event += ToggleInventoryUI;
 			UnityGameInstance.InventoryManager.FillInventoryDefault(Inventory);
-			
-			foreach (var inventoryStack in Inventory.Stacks)
-			{
-				print(inventoryStack);
-			}
 		}
 
 		protected override void ToggleInventoryUI(EEventStage eventStage)

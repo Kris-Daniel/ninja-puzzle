@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using NinjaPuzzle.Code.Unity.Systems.Inventory;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,8 +7,9 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 	public class XmlDragController : AXmlController
 	{
 		private Vector2 m_offset;
-		private VisualElement m_currentElement;
-		private VisualElement m_initialParent;
+		private VisualElement m_currentItemCell;
+		private ItemStack m_currentItemStack;
+		private Inventory m_currentInventory;
 
 		public XmlDragController(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement)
 		{
@@ -24,53 +25,79 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 
 		private void OnPointerDown(PointerDownEvent evt)
 		{
-			m_currentElement = ((VisualElement) evt.target).ClosestParent("item-cell");
+			if(m_currentItemStack.ItemData) return;
+			
+			m_currentItemCell = ((VisualElement) evt.target).ClosestParent("item-cell");
 
-			if (m_currentElement != null)
+			if (m_currentItemCell != null)
 			{
-				m_initialParent = m_currentElement.parent;
-				m_offset = new Vector2(m_currentElement.layout.width * 0.25f, m_currentElement.layout.height * 0.75f);
+				var inventoryXml = m_currentItemCell.ClosestParent("inventory");
+				var inventory = UnityGameInstance.InventoryManager.Inventories[int.Parse(inventoryXml.viewDataKey)];
+				m_currentInventory = inventory;
+				
+				m_offset = new Vector2(m_currentItemCell.layout.width * 0.25f, m_currentItemCell.layout.height * 0.75f);
 
-				m_currentElement.style.width = m_currentElement.layout.width;
-				m_currentElement.style.height = m_currentElement.layout.height;
+				m_currentItemCell.style.width = m_currentItemCell.layout.width;
+				m_currentItemCell.style.height = m_currentItemCell.layout.height;
 
-				m_currentElement.AddToClassList("item-cell--drag");
-				m_currentElement.GetRootElement().Insert(0, m_currentElement);
+				m_currentItemCell.AddToClassList("item-cell--drag");
+				m_currentItemCell.GetRootElement().Insert(0, m_currentItemCell);
 
-				m_currentElement.style.left = evt.position.x - m_offset.x;
-				m_currentElement.style.top = evt.position.y - m_offset.y;
+				m_currentItemCell.style.left = evt.position.x - m_offset.x;
+				m_currentItemCell.style.top = evt.position.y - m_offset.y;
+				
+				m_currentItemStack = inventory.SafeUseFromIndex(int.Parse(m_currentItemCell.viewDataKey));
 			}
 		}
 
 		private void OnPointerMove(PointerMoveEvent evt)
 		{
-			if (m_currentElement != null)
+			if (m_currentItemCell != null)
 			{
-				m_currentElement.style.left = evt.position.x - m_offset.x;
-				m_currentElement.style.top = evt.position.y - m_offset.y;
+				m_currentItemCell.style.left = evt.position.x - m_offset.x;
+				m_currentItemCell.style.top = evt.position.y - m_offset.y;
 			}
 		}
 
 		private void OnPointerUp(PointerUpEvent evt)
 		{
-			if (m_currentElement != null)
+			if (m_currentItemCell != null)
 			{
-				VisualElement itemCell = (VisualElement) evt.target;
+				VisualElement itemCellLanding = (VisualElement) evt.target;
 
-				itemCell = itemCell.ClosestParent("item-cell");
-
-				if (itemCell != null)
+				itemCellLanding = itemCellLanding.ClosestParent("item-cell-landing");
+				
+				if (itemCellLanding != null)
 				{
-					VisualElement inventory = itemCell.ClosestParent("inventory");
-					Debug.Log(itemCell.viewDataKey + " = " + inventory.viewDataKey);
-				}
+					VisualElement inventoryXml = itemCellLanding.ClosestParent("inventory");
 
-				m_initialParent.Add(m_currentElement);
-				m_currentElement.style.left = 0;
-				m_currentElement.style.top = 0;
-				m_currentElement.RemoveFromClassList("item-cell--drag");
-				m_currentElement = null;
+					var inventory = UnityGameInstance.InventoryManager.Inventories[int.Parse(inventoryXml.viewDataKey)];
+
+					var remains = inventory.SafeAddToIndex(m_currentItemStack, int.Parse(itemCellLanding.viewDataKey));
+					
+					if (remains.Count > 0)
+					{
+						m_currentItemStack = remains;
+					}
+					else
+					{
+						ResetDragData();
+					}
+				}
+				else
+				{
+					m_currentInventory.SafeAdd(m_currentItemStack.ItemData, (uint) m_currentItemStack.Count);
+					ResetDragData();
+				}
 			}
+		}
+
+		private void ResetDragData()
+		{
+			m_currentItemStack = new ItemStack();
+			m_currentItemCell.parent.Remove(m_currentItemCell);
+			m_currentItemCell = null;
+			m_currentInventory = null;
 		}
 	}
 }

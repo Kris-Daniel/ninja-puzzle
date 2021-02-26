@@ -2,6 +2,7 @@
 using NinjaPuzzle.Code.UI.Uxml.Components.ItemCellComponent;
 using NinjaPuzzle.Code.UI.Uxml.Mixins;
 using NinjaPuzzle.Code.Unity.Systems.Inventory;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace NinjaPuzzle.Code.UI.Uxml.Components.InventoryComponent
@@ -36,6 +37,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Components.InventoryComponent
 		void RenderItemCells()
 		{
 			m_inventoryTop.Clear();
+			
 			for (int i = 0; i < m_inventory.Stacks.Length; i++)
 			{
 				VisualElement grid = new VisualElement();
@@ -43,6 +45,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Components.InventoryComponent
 				
 				VisualElement itemCellLanding = new VisualElement();
 				itemCellLanding.AddToClassList("item-cell-landing");
+				itemCellLanding.name = "item-cell-landing";
 				itemCellLanding.viewDataKey = i.ToString();
 				
 				grid.Add(itemCellLanding);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NinjaPuzzle.Code.Unity.ScriptableObjects.Inventory;
+using UnityEngine;
 
 namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 {
@@ -27,23 +28,25 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 
 		public ItemStack SafeAddToIndex(ItemStack itemStack, int stackIndex)
 		{
+			ItemStack returnItemStack = itemStack;
+			
 			if (stackIndex < Stacks.Length)
 			{
-				if (Stacks[stackIndex].ItemData)
+				if (!Stacks[stackIndex].ItemData)
 				{
 					Stacks[stackIndex] = itemStack;
-					return new ItemStack();
+					returnItemStack = new ItemStack();
 				}
-				if (Stacks[stackIndex].ItemData == itemStack.ItemData)
+				else if (Stacks[stackIndex].ItemData == itemStack.ItemData)
 				{
 					int itemRemains = Stacks[stackIndex].Add((uint)itemStack.Count);
-					return new ItemStack(itemStack.ItemData, (uint) itemRemains);
+					returnItemStack = new ItemStack(itemStack.ItemData, (uint) itemRemains);
 				}
 			}
 			
 			OnChange?.Invoke();
 			
-			return itemStack;
+			return returnItemStack;
 		}
 		
 		public ItemStack SafeUseFromIndex(int stackIndex)
