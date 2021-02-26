@@ -1,4 +1,5 @@
-﻿using NinjaPuzzle.Code.Unity.Systems.Inventory;
+﻿using NinjaPuzzle.Code.UI.Uxml.Components.ItemCellComponent;
+using NinjaPuzzle.Code.Unity.Systems.Inventory;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -78,6 +79,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 					if (remains.Count > 0)
 					{
 						m_currentItemStack = remains;
+						ItemCellXml.Render(m_currentItemCell, m_currentItemStack);
 					}
 					else
 					{

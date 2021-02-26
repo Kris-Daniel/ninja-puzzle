@@ -39,7 +39,7 @@ namespace NinjaPuzzle.Code.Unity.Managers
 				{EItem.Katana, 1},
 				{EItem.Kunai, 1},
 				{EItem.ShurikenAttract, 2},
-				{EItem.ShurikenRepel, 2}
+				{EItem.ShurikenRepel, 6}
 			};
 			
 			foreach (var keyValuePair in defaultItems)
