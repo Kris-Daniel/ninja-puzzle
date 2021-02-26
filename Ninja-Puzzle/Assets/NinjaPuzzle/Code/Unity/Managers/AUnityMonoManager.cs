@@ -1,16 +1,12 @@
 ﻿using NinjaPuzzle.Code.Gameplay;
-using NinjaPuzzle.Code.Unity.GameSetup;
-using UnityEngine;
 
 namespace NinjaPuzzle.Code.Unity.Managers
 {
-	public abstract class AUnityMonoManager : MonoBehaviour
+	public abstract class AUnityMonoManager : AMonoRefToUnityGameInstance
 	{
-		protected UnityGameInstance UnityGameInstance;
-		
-		protected virtual void Awake()
+		protected override void Awake()
 		{
-			UnityGameInstance = NinjaPuzzleApp.Instance.UnityGameInstance;
+			base.Awake();
 			UnityGameInstance.MonoManagers.AddUnique(this);
 		}
 	}

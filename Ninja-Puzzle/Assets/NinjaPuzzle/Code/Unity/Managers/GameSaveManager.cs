@@ -7,8 +7,7 @@ namespace NinjaPuzzle.Code.Unity.Managers
 	{
 		public int LevelProgress { get; set; }
 		public IGameSaveData CurrentGameSave => this;
-
-
+		
 		public GameSaveManager(UnityGameInstance unityGameInstance) : base(unityGameInstance)
 		{
 			LevelProgress = 1;

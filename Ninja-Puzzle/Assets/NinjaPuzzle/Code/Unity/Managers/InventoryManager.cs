@@ -8,6 +8,8 @@ namespace NinjaPuzzle.Code.Unity.Managers
 	{
 		private readonly ScriptableDataManager m_scriptableDataManager;
 		
+		public Dictionary<int, Inventory> Inventories { get; private set; } = new Dictionary<int, Inventory>();
+		
 		public InventoryManager(UnityGameInstance unityGameInstance) : base(unityGameInstance)
 		{
 			m_scriptableDataManager = unityGameInstance.ScriptableDataManager;
@@ -16,6 +18,18 @@ namespace NinjaPuzzle.Code.Unity.Managers
 		public Inventory CreateInventory(int stacksCount)
 		{
 			return new Inventory(stacksCount);
+		}
+
+		public void ToggleInventoryReference(Inventory inventory)
+		{
+			if (Inventories.ContainsKey(inventory.Key))
+			{
+				Inventories.Remove(inventory.Key);
+			}
+			else
+			{
+				Inventories.Add(inventory.Key, inventory);
+			}
 		}
 
 		public void FillInventoryDefault(Inventory inventory)

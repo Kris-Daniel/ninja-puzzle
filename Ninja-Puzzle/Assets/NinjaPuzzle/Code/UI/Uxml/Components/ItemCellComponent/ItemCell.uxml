@@ -1,13 +1,13 @@
-﻿<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+﻿<UXML xmlns="UnityEngine.UIElements">
 
-    <ui:VisualElement name="item-cell" class="item-cell" view-data-key="HelloWorld">
+    <VisualElement name="item-cell" class="item-cell" view-data-key="">
         
-        <ui:Image class="item-cell_icon" name="item-icon" />
+        <Image class="item-cell_icon" name="item-icon" />
 
-        <ui:TextElement class="item-cell_text" name="item-cell_name" text="" />
+        <TextElement class="item-cell_text" name="item-cell_name" text="" />
 
-        <ui:TextElement class="item-cell_count" name="item-cell_count" text=""/>
+        <TextElement class="item-cell_count" name="item-cell_count" text=""/>
 
-        </ui:VisualElement>
+        </VisualElement>
 
-</ui:UXML>
+</UXML>

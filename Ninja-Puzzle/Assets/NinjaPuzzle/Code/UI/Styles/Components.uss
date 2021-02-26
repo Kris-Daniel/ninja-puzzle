@@ -16,24 +16,29 @@ VisualElement {}
 
 .inventory-grid{
     width: 20%;
-    padding: 12px;
 }
 
 /* Item Cell */
+.item-cell-landing{
+    padding-top: 100%;
+    border-width: 2px;
+    border-color: coral;
+    border-radius: 10px;
+    position: relative;
+}
+
 .item-cell {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 8px;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .item-cell--drag{
     position: absolute !important;
-    width: 100px;
-    height: 200px;
 }
 
 .item-cell_square{
@@ -43,8 +48,4 @@ VisualElement {}
 .item-cell_count{
     height: 30px;
     background-color: rgba(0, 0, 0, 0.5);
-}
-
-.item-cell-bed{
-    position: relative;
 }

@@ -7,26 +7,16 @@ namespace NinjaPuzzle.Code.UI.Uxml.Components.ItemCellComponent
 {
 	public class ItemCellXml : AXmlController
 	{
-		private readonly TextElement m_name;
-		private readonly TextElement m_counter;
+		public ItemCellXml(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement)
+		{}
 
-		private static ItemCellXml currentItemCell;
-		private static Vector2 startPos;
-		
-		public ItemStack ItemStack { get; private set; }
-		public Inventory Inventory { get; private set; }
-
-		
-		public int Index = -1;
-		
-		public ItemCellXml(AXmlController parent, VisualElement xmlElement, ItemStack itemStack, Inventory inventory) : base(parent, xmlElement)
+		public static void Render(VisualElement xmlElement, ItemStack itemStack)
 		{
-			m_name = xmlElement.Q<TextElement>("item-cell_name");
-			m_counter = xmlElement.Q<TextElement>("item-cell_count");
-			ItemStack = itemStack;
-			Inventory = inventory;
-			m_name.text = itemStack.ItemData.name;
-			m_counter.text = itemStack.Count.ToString();
+			TextElement name = xmlElement.Q<TextElement>("item-cell_name");
+			TextElement counter = xmlElement.Q<TextElement>("item-cell_count");
+
+			name.text = itemStack.ItemData.ItemName;
+			counter.text = itemStack.Count.ToString();
 		}
 	}
 }

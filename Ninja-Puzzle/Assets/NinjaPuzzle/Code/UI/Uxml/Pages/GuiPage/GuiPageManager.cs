@@ -6,7 +6,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Pages.GuiPage
 	public class GuiPageManager : AUnityMonoManager
 	{
 		private UIDocument m_uiDocument;
-		private GuiPageXml m_guiPageXml;
+		public GuiPageXml GuiPageXml { get; private set; }
 
 		protected override void Awake()
 		{
@@ -16,7 +16,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Pages.GuiPage
 
 		private void Start()
 		{
-			m_guiPageXml = new GuiPageXml(null, m_uiDocument.rootVisualElement.Q("gui-page"), this);
+			GuiPageXml = new GuiPageXml(null, m_uiDocument.rootVisualElement.Q("gui-page"), this);
 		}
 	}
 }

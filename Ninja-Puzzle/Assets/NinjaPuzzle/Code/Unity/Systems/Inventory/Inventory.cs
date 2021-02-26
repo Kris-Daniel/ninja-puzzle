@@ -5,13 +5,15 @@ using NinjaPuzzle.Code.Unity.ScriptableObjects.Inventory;
 
 namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 {
-	public class Inventory
+	public sealed class Inventory
 	{
+		public int Key { get; private set; }
 		public ItemStack[] Stacks { get; private set; }
 		public Action OnChange;
 
 		public Inventory(int maxStacks)
 		{
+			Key = this.GetHashCode();
 			Stacks = new ItemStack[maxStacks];
 		}
 
