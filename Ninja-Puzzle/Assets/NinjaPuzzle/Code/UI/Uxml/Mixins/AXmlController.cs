@@ -19,7 +19,6 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 			UnityGameInstance = NinjaPuzzleApp.Instance.UnityGameInstance;
 			RuntimeData = UnityGameInstance.Game.GameController.RuntimeData;
 			EventManager = UnityGameInstance.Game.GameController.EventManager;
-			XmlElement.SaveXmlController(this);
 		}
 	}
 }

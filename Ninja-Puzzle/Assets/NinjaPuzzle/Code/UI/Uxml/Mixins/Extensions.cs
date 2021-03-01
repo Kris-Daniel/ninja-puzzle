@@ -39,11 +39,5 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 			
 			return xmlController;
 		}
-
-		public static void SaveXmlController(this VisualElement xmlElement, AXmlController xmlController)
-		{
-			var root = (PageXml) xmlController.GetRootController();
-			root.XmlControllersByVisualElement.Add(xmlElement, xmlController);
-		}
 	}
 }

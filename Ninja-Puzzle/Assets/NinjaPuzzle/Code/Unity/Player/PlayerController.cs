@@ -2,7 +2,7 @@
 
 namespace NinjaPuzzle.Code.Unity.Player
 {
-	public class PlayerController : AUnityMonoManager
+	public class PlayerController : AMonoRefToUnityGameInstance
 	{
 		protected override void Awake()
 		{

@@ -7,6 +7,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Layouts.InventoryLayout
 {
 	public class InventoryLayoutXml : AXmlController
 	{
+		// Child XmlControllers
 		private readonly PlayerInventoryXml m_playerInventoryXml;
 		
 		public InventoryLayoutXml(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement)

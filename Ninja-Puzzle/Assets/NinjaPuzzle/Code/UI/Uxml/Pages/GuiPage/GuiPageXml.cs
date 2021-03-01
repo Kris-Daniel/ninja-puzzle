@@ -11,10 +11,11 @@ namespace NinjaPuzzle.Code.UI.Uxml.Pages.GuiPage
 		public GuiPageManager GuiPageManager { get; private set; }
 		private XmlDragController m_xmlDragController;
 		
+		private readonly List<VisualElement> m_layouts;
+
+		// Child XmlControllers
 		public InventoryLayoutXml InventoryLayout { get; private set; }
 		public GuiLayoutXml GuiLayout { get; private set; }
-		
-		private List<VisualElement> m_layouts;
 		
 		public GuiPageXml(AXmlController parent, VisualElement xmlElement, GuiPageManager guiPageManager) : base(parent, xmlElement)
 		{
@@ -24,6 +25,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Pages.GuiPage
 			
 			m_layouts = xmlElement.Query<VisualElement>(null, "layout").ToList();
 			
+			// Child XmlControllers
 			InventoryLayout = new InventoryLayoutXml(this, xmlElement.Q("inventory-layout"));
 			GuiLayout = new GuiLayoutXml(this, xmlElement.Q("gui-layout"));
 		}
