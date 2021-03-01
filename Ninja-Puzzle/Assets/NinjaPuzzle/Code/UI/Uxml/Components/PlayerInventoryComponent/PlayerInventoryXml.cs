@@ -10,14 +10,12 @@ namespace NinjaPuzzle.Code.UI.Uxml.Components.PlayerInventoryComponent
 	{
 		private readonly VisualElement m_inventoryTop;
 		private readonly VisualElement m_inventoryBottom;
-		private readonly VisualTreeAsset m_cellTemplate;
 		private Inventory m_inventory;
 		
 		public PlayerInventoryXml(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement)
 		{
 			m_inventoryTop = XmlElement.Q("inventory_top");
 			m_inventoryBottom = XmlElement.Q("inventory_bottom");
-			m_cellTemplate = PathStore.GetTemplate("Components/ItemCellComponent/ItemCell");
 		}
 
 		public void Render(Inventory inventory)
@@ -54,13 +52,13 @@ namespace NinjaPuzzle.Code.UI.Uxml.Components.PlayerInventoryComponent
 
 				if (m_inventory.Stacks[i].ItemData)
 				{
-					VisualElement itemCell = m_cellTemplate.CloneTree().Children().ToList()[0]; //template
+					VisualElement itemCell = PathStore.ItemCell.CloneTree().Children().ToList()[0]; //template
 					ItemCellXml.Render(itemCell, m_inventory.Stacks[i]);
 					itemCell.viewDataKey = i.ToString();
 					itemCellLanding.Add(itemCell);
 				}
 
-				VisualElement inventoryBox = i < 10 ? m_inventoryTop : m_inventoryBottom;
+				VisualElement inventoryBox = i > 4 ? m_inventoryTop : m_inventoryBottom;
 				inventoryBox.Add(grid);
 			}
 		}

@@ -7,6 +7,7 @@ namespace NinjaPuzzle.Code.Gameplay.Managers
 	{
 		public Action<GameController> OnGameInitialized { get; set; }
 		public Action<Inventory> OnToggleInventory;
+		public Action<Inventory> OnPlayerInventoryInit;
 		
 		public EventManager(GameController gameController) : base(gameController) { }
 	}

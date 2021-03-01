@@ -1,9 +1,17 @@
 ﻿<UXML xmlns="UnityEngine.UIElements">
 
-    <VisualElement name="gui-layout" class="layout" view-data-key="">
+    <Template name="hotbar-t" src="../../Components/HotBarComponent/HotBar.uxml" />
 
+    <VisualElement name="gui-layout" class="layout abs-full" view-data-key="">
         
-
+        <VisualElement class="abs-center">
+            <VisualElement class="aim" />
+        </VisualElement>
+        
+        <VisualElement class="h100 gui-layout">
+            <Instance template="hotbar-t" class="w100"/>
+        </VisualElement>
+        
     </VisualElement>
 
 </UXML>

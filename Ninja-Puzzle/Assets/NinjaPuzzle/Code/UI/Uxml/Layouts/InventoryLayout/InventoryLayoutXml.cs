@@ -19,9 +19,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Layouts.InventoryLayout
 		public void Toggle(Inventory inventory)
 		{
 			XmlElement.ToggleInClassList("hide");
-			
-			UnityGameInstance.InventoryManager.ToggleInventoryReference(inventory);
-			
+
 			if (!XmlElement.ClassListContains("hide"))
 			{
 				m_playerInventoryXml.Render(inventory);

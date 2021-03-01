@@ -35,21 +35,24 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 			if (m_currentItemCell != null)
 			{
 				var inventoryXml = m_currentItemCell.ClosestParent("inventory");
-				var inventory = UnityGameInstance.InventoryManager.Inventories[int.Parse(inventoryXml.viewDataKey)];
-				m_currentInventory = inventory;
-				
-				m_offset = new Vector2(m_currentItemCell.layout.width * 0.25f, m_currentItemCell.layout.height * 0.75f);
+				if (inventoryXml != null)
+				{
+					var inventory = UnityGameInstance.InventoryManager.Inventories[int.Parse(inventoryXml.viewDataKey)];
+					m_currentInventory = inventory;
+					
+					m_offset = new Vector2(m_currentItemCell.layout.width * 0.25f, m_currentItemCell.layout.height * 0.75f);
 
-				m_currentItemCell.style.width = m_currentItemCell.layout.width;
-				m_currentItemCell.style.height = m_currentItemCell.layout.height;
+					m_currentItemCell.style.width = m_currentItemCell.layout.width;
+					m_currentItemCell.style.height = m_currentItemCell.layout.height;
 
-				m_currentItemCell.AddToClassList("item-cell--drag");
-				XmlElement.Insert(0, m_currentItemCell);
+					m_currentItemCell.AddToClassList("item-cell--drag");
+					XmlElement.Insert(0, m_currentItemCell);
 
-				m_currentItemCell.style.left = evt.position.x - m_offset.x;
-				m_currentItemCell.style.top = evt.position.y - m_offset.y;
-				
-				m_currentItemStack = inventory.SafeUseFromIndex(int.Parse(m_currentItemCell.viewDataKey));
+					m_currentItemCell.style.left = evt.position.x - m_offset.x;
+					m_currentItemCell.style.top = evt.position.y - m_offset.y;
+					
+					m_currentItemStack = inventory.SafeUseFromIndex(int.Parse(m_currentItemCell.viewDataKey));
+				}
 			}
 		}
 
