@@ -88,7 +88,6 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 				}
 				else
 				{
-					m_currentItemStack.Print();
 					m_currentInventory.SafeAdd(m_currentItemStack.ItemData, (uint) m_currentItemStack.Count);
 					ResetDragData();
 				}

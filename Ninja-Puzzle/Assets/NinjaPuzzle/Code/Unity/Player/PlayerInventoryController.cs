@@ -16,7 +16,7 @@ namespace NinjaPuzzle.Code.Unity.Player
 		{
 			if (eventStage == EEventStage.Down)
 			{
-				UnityGameInstance.Game.GameController.RuntimeData.OnToggleInventory?.Invoke(Inventory);
+				UnityGameInstance.Game.GameController.EventManager.OnToggleInventory?.Invoke(Inventory);
 			}
 		}
 	}

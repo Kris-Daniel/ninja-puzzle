@@ -10,6 +10,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 		public VisualElement XmlElement { get; private set; }
 		public UnityGameInstance UnityGameInstance { get; private set; }
 		public RuntimeData RuntimeData { get; private set; }
+		public EventManager EventManager { get; private set; }
 		
 		protected AXmlController(AXmlController parent, VisualElement xmlElement)
 		{
@@ -17,6 +18,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 			XmlElement = xmlElement;
 			UnityGameInstance = NinjaPuzzleApp.Instance.UnityGameInstance;
 			RuntimeData = UnityGameInstance.Game.GameController.RuntimeData;
+			EventManager = UnityGameInstance.Game.GameController.EventManager;
 			XmlElement.SaveXmlController(this);
 		}
 	}

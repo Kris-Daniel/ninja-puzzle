@@ -1,6 +1,4 @@
-﻿using System;
-using NinjaPuzzle.Code.Gameplay.Interfaces;
-using NinjaPuzzle.Code.Unity.Systems.Inventory;
+﻿using NinjaPuzzle.Code.Gameplay.Interfaces;
 
 namespace NinjaPuzzle.Code.Gameplay.Managers
 {
@@ -8,8 +6,6 @@ namespace NinjaPuzzle.Code.Gameplay.Managers
 	{
 		public int LevelProgress { get; set; }
 
-		public Action<Inventory> OnToggleInventory;
-		
 		public RuntimeData(IGameSaveData gameSaveData)
 		{
 			LevelProgress = gameSaveData.LevelProgress;
