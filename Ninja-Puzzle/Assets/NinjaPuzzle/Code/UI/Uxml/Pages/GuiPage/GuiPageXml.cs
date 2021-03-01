@@ -1,6 +1,7 @@
-﻿using NinjaPuzzle.Code.UI.Uxml.Components.InventoryComponent;
+﻿using System.Collections.Generic;
+using NinjaPuzzle.Code.UI.Uxml.Layouts.GuiLayout;
+using NinjaPuzzle.Code.UI.Uxml.Layouts.InventoryLayout;
 using NinjaPuzzle.Code.UI.Uxml.Mixins;
-using NinjaPuzzle.Code.Unity.Systems.Inventory;
 using UnityEngine.UIElements;
 
 namespace NinjaPuzzle.Code.UI.Uxml.Pages.GuiPage
@@ -8,8 +9,12 @@ namespace NinjaPuzzle.Code.UI.Uxml.Pages.GuiPage
 	public class GuiPageXml : PageXml
 	{
 		public GuiPageManager GuiPageManager { get; private set; }
-		public InventoryXml InventoryXml { get; private set; }
 		private XmlDragController m_xmlDragController;
+		
+		public InventoryLayoutXml InventoryLayout { get; private set; }
+		public GuiLayoutXml GuiLayout { get; private set; }
+		
+		private List<VisualElement> m_layouts;
 		
 		public GuiPageXml(AXmlController parent, VisualElement xmlElement, GuiPageManager guiPageManager) : base(parent, xmlElement)
 		{
@@ -17,21 +22,17 @@ namespace NinjaPuzzle.Code.UI.Uxml.Pages.GuiPage
 			
 			m_xmlDragController = new XmlDragController(this, xmlElement);
 			
-			InventoryXml = new InventoryXml(this, xmlElement.Q("inventory"));
+			m_layouts = xmlElement.Query<VisualElement>(null, "layout").ToList();
+			
+			InventoryLayout = new InventoryLayoutXml(this, xmlElement.Q("inventory-layout"));
+			GuiLayout = new GuiLayoutXml(this, xmlElement.Q("gui-layout"));
 		}
 
-		public void ToggleInventoryUI(Inventory inventory)
+		public void HideAllLayouts()
 		{
-			InventoryXml.XmlElement.ToggleInClassList("hide");
-			UnityGameInstance.InventoryManager.ToggleInventoryReference(inventory);
-			
-			if (!InventoryXml.XmlElement.ClassListContains("hide"))
+			foreach (var visualElement in m_layouts)
 			{
-				InventoryXml.Render(inventory);
-			}
-			else
-			{
-				InventoryXml.UnRender(inventory);
+				visualElement.AddToClassList("hide");
 			}
 		}
 	}

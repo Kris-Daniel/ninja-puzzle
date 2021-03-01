@@ -1,5 +1,4 @@
-﻿using NinjaPuzzle.Code.UI.Uxml.Pages.GuiPage;
-using NinjaPuzzle.Code.Unity.Managers;
+﻿using NinjaPuzzle.Code.Unity.Managers;
 using NinjaPuzzle.Code.Unity.Systems.Inventory;
 
 namespace NinjaPuzzle.Code.Unity.Player
@@ -17,7 +16,7 @@ namespace NinjaPuzzle.Code.Unity.Player
 		{
 			if (eventStage == EEventStage.Down)
 			{
-				UnityGameInstance.GetUnityMonoManager<GuiPageManager>().GuiPageXml.ToggleInventoryUI(Inventory);
+				UnityGameInstance.Game.GameController.RuntimeData.OnToggleInventory?.Invoke(Inventory);
 			}
 		}
 	}

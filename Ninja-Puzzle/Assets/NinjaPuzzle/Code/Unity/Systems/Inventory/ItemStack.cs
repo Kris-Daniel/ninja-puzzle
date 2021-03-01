@@ -48,5 +48,10 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 		{
 			Count = Mathf.Clamp(Count + difference, 0, ItemData.MaxItemsInStack);
 		}
+
+		public void Print()
+		{
+			Debug.Log(ItemData.ItemName + " = " + Count);
+		}
 	}
 }

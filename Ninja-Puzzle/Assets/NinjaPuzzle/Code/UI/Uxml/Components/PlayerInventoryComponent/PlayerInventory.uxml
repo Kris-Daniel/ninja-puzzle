@@ -1,0 +1,16 @@
+<UXML xmlns="UnityEngine.UIElements">
+    
+    <Template name="cell-t" src="../ItemCellComponent/ItemCell.uxml" />
+    
+    <VisualElement class="inventory" name="inventory" view-data-key="">
+        
+        <VisualElement name="inventory_top" class="inventory_box">
+            
+        </VisualElement>
+
+        <VisualElement name="inventory_bottom" class="inventory_box inventory_box--bottom mt100">
+
+        </VisualElement>
+    </VisualElement>
+    
+</UXML>

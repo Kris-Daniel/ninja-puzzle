@@ -1,0 +1,11 @@
+﻿<UXML xmlns="UnityEngine.UIElements">
+
+    <Template name="player-inventory-t" src="/Assets/NinjaPuzzle/Code/UI/Uxml/Components/PlayerInventoryComponent/PlayerInventory.uxml" />
+    
+    <VisualElement name="inventory-layout" class="layout inventory-layout hide">
+
+        <Instance template="player-inventory-t" />
+
+    </VisualElement>
+
+</UXML>

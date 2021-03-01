@@ -42,7 +42,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 				m_currentItemCell.style.height = m_currentItemCell.layout.height;
 
 				m_currentItemCell.AddToClassList("item-cell--drag");
-				m_currentItemCell.GetRootElement().Insert(0, m_currentItemCell);
+				XmlElement.Insert(0, m_currentItemCell);
 
 				m_currentItemCell.style.left = evt.position.x - m_offset.x;
 				m_currentItemCell.style.top = evt.position.y - m_offset.y;
@@ -88,6 +88,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 				}
 				else
 				{
+					m_currentItemStack.Print();
 					m_currentInventory.SafeAdd(m_currentItemStack.ItemData, (uint) m_currentItemStack.Count);
 					ResetDragData();
 				}

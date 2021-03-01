@@ -1,6 +1,0 @@
-<UXML xmlns="UnityEngine.UIElements">
-    <Template name="np-button" src="/Assets/NinjaPuzzle/Code/UI/Uxml/Components/Button.uxml" />
-    <VisualElement>
-        <Instance template="np-button" />
-    </VisualElement>
-</UXML>

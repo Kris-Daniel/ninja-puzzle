@@ -2,20 +2,21 @@
 using NinjaPuzzle.Code.UI.Uxml.Components.ItemCellComponent;
 using NinjaPuzzle.Code.UI.Uxml.Mixins;
 using NinjaPuzzle.Code.Unity.Systems.Inventory;
-using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace NinjaPuzzle.Code.UI.Uxml.Components.InventoryComponent
+namespace NinjaPuzzle.Code.UI.Uxml.Components.PlayerInventoryComponent
 {
-	public class InventoryXml : AXmlController
+	public class PlayerInventoryXml : AXmlController
 	{
-		private VisualElement m_inventoryTop;
-		private VisualTreeAsset m_cellTemplate;
+		private readonly VisualElement m_inventoryTop;
+		private readonly VisualElement m_inventoryBottom;
+		private readonly VisualTreeAsset m_cellTemplate;
 		private Inventory m_inventory;
 		
-		public InventoryXml(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement)
+		public PlayerInventoryXml(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement)
 		{
 			m_inventoryTop = XmlElement.Q("inventory_top");
+			m_inventoryBottom = XmlElement.Q("inventory_bottom");
 			m_cellTemplate = PathStore.GetTemplate("Components/ItemCellComponent/ItemCell");
 		}
 
@@ -37,6 +38,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Components.InventoryComponent
 		void RenderItemCells()
 		{
 			m_inventoryTop.Clear();
+			m_inventoryBottom.Clear();
 			
 			for (int i = 0; i < m_inventory.Stacks.Length; i++)
 			{
@@ -57,8 +59,9 @@ namespace NinjaPuzzle.Code.UI.Uxml.Components.InventoryComponent
 					itemCell.viewDataKey = i.ToString();
 					itemCellLanding.Add(itemCell);
 				}
-				
-				m_inventoryTop.Add(grid);
+
+				VisualElement inventoryBox = i < 10 ? m_inventoryTop : m_inventoryBottom;
+				inventoryBox.Add(grid);
 			}
 		}
 	}

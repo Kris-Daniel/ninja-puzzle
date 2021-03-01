@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d119960ef2e7416db3c4d78b03bc1ffa, type: 3}
   m_Name: ShurikenRepel
   m_EditorClassIdentifier: 
-  itemName: ShurikenRepel
-  itemType: 2
+  itemName: Shuriken Repel
   maxItemsInStack: 4
   prefab: {fileID: 5780637836969275554, guid: 7a40ef7956e98bc46aab1be33261eed4, type: 3}

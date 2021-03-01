@@ -68,18 +68,11 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 		{
 			List<ItemData> remainsItems = new List<ItemData>();
 
-			ItemStack foundedStack = new ItemStack();
-			
 			int stackIndex = FindNotFilledStack(itemData);
 			
-			if (stackIndex > -1)
+			if (stackIndex > -1 && Stacks[stackIndex].Count < Stacks[stackIndex].ItemData.MaxItemsInStack)
 			{
-				foundedStack = Stacks[stackIndex];
-			}
-
-			if (foundedStack.ItemData)
-			{
-				int itemRemains = foundedStack.Add(count);
+				int itemRemains = Stacks[stackIndex].Add(count);
 				if (itemRemains > 0)
 				{
 					int freeIndex = GetFreeIndex();

@@ -2,11 +2,11 @@
 
     <VisualElement name="item-cell" class="item-cell" view-data-key="">
         
-        <Image class="item-cell_icon" name="item-icon" />
+        <!--<Image class="item-cell_icon" name="item-icon" />-->
 
-        <TextElement class="item-cell_text" name="item-cell_name" text="" />
+        <TextElement class="item-cell_text text20" name="item-cell_name" text="" />
 
-        <TextElement class="item-cell_count" name="item-cell_count" text=""/>
+        <TextElement class="item-cell_count pv10 text30" name="item-cell_count" text=""/>
 
         </VisualElement>
 
