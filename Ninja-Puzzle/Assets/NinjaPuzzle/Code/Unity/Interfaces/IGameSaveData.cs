@@ -1,4 +1,4 @@
-﻿namespace NinjaPuzzle.Code.Gameplay.Interfaces
+﻿namespace NinjaPuzzle.Code.Unity.Interfaces
 {
 	public interface IGameSaveData
 	{

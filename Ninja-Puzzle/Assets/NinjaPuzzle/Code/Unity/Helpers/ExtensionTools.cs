@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NinjaPuzzle.Code.Gameplay
+namespace NinjaPuzzle.Code.Unity.Helpers
 {
 	public static class ExtensionTools
 	{

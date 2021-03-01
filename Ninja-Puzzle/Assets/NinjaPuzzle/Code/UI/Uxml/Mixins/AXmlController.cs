@@ -1,5 +1,5 @@
-﻿using NinjaPuzzle.Code.Gameplay.Managers;
-using NinjaPuzzle.Code.Unity.GameSetup;
+﻿using NinjaPuzzle.Code.Unity.GameSetup;
+using NinjaPuzzle.Code.Unity.Managers;
 using UnityEngine.UIElements;
 
 namespace NinjaPuzzle.Code.UI.Uxml.Mixins
@@ -17,8 +17,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 			Parent = parent;
 			XmlElement = xmlElement;
 			UnityGameInstance = NinjaPuzzleApp.Instance.UnityGameInstance;
-			RuntimeData = UnityGameInstance.Game.GameController.RuntimeData;
-			EventManager = UnityGameInstance.Game.GameController.EventManager;
+			EventManager = UnityGameInstance.EventManager;
 		}
 	}
 }

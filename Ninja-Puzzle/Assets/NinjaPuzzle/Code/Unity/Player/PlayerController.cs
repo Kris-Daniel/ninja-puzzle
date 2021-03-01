@@ -1,4 +1,5 @@
-﻿using NinjaPuzzle.Code.Unity.Managers;
+﻿using NinjaPuzzle.Code.Unity.Enums;
+using NinjaPuzzle.Code.Unity.Managers;
 
 namespace NinjaPuzzle.Code.Unity.Player
 {
@@ -7,8 +8,8 @@ namespace NinjaPuzzle.Code.Unity.Player
 		protected override void Awake()
 		{
 			base.Awake();
-			UnityGameInstance.InputManager.Events[EButtonEvent.OnFire1].Event += Fire1;
-			UnityGameInstance.InputManager.Events[EButtonEvent.OnFire2].Event += Fire2;
+			UnityGameInstance.InputManager.Events[EGameState.GamePlay][EButtonEvent.OnFire1].Event += Fire1;
+			UnityGameInstance.InputManager.Events[EGameState.GamePlay][EButtonEvent.OnFire2].Event += Fire2;
 		}
 
 		private void Fire1(EEventStage eventStage)

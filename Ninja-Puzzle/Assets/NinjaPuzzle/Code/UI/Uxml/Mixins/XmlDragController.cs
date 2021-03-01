@@ -1,5 +1,5 @@
 ﻿using NinjaPuzzle.Code.UI.Uxml.Components.ItemCellComponent;
-using NinjaPuzzle.Code.Unity.Managers;
+using NinjaPuzzle.Code.Unity.Enums;
 using NinjaPuzzle.Code.Unity.Systems.Inventory;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -16,7 +16,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 		public XmlDragController(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement)
 		{
 			RegisterCallbacks();
-			EventManager.OnToggleInventory += ResetIfHasCurrentDragData;
+			EventManager.OnChangeGameState += ResetIfHasCurrentDragData;
 		}
 
 		void RegisterCallbacks()
@@ -99,12 +99,15 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 			}
 		}
 
-		public void ResetIfHasCurrentDragData(Inventory inventory)
+		public void ResetIfHasCurrentDragData(EGameState gameState, EGameState prevGameState)
 		{
-			if (m_currentItemCell != null)
+			if (prevGameState == EGameState.GamePlayInventory)
 			{
-				m_currentInventory.SafeAdd(m_currentItemStack.ItemData, (uint) m_currentItemStack.Count);
-				ResetDragData();
+				if (m_currentItemCell != null)
+				{
+					m_currentInventory.SafeAdd(m_currentItemStack.ItemData, (uint) m_currentItemStack.Count);
+					ResetDragData();
+				}
 			}
 		}
 

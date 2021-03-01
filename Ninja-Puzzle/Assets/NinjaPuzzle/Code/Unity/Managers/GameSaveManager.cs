@@ -1,5 +1,5 @@
-﻿using NinjaPuzzle.Code.Gameplay.Interfaces;
-using NinjaPuzzle.Code.Unity.GameSetup;
+﻿using NinjaPuzzle.Code.Unity.GameSetup;
+using NinjaPuzzle.Code.Unity.Interfaces;
 
 namespace NinjaPuzzle.Code.Unity.Managers
 {

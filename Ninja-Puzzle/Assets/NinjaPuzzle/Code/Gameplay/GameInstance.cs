@@ -1,4 +1,4 @@
-﻿using NinjaPuzzle.Code.Gameplay.Interfaces;
+﻿using NinjaPuzzle.Code.Unity.Interfaces;
 
 namespace NinjaPuzzle.Code.Gameplay
 {
@@ -9,11 +9,6 @@ namespace NinjaPuzzle.Code.Gameplay
 		public GameInstance(IGameSaveData gameSaveData)
 		{
 			GameController = new GameController(this, gameSaveData);
-		}
-		
-		public void Start()
-		{
-			GameController.Start();
 		}
 
 		public void Update()

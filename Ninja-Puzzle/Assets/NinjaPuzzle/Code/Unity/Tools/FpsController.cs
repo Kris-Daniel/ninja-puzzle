@@ -1,4 +1,4 @@
-﻿using System;
+﻿using NinjaPuzzle.Code.Unity.Enums;
 using NinjaPuzzle.Code.Unity.GameSetup;
 using NinjaPuzzle.Code.Unity.Managers;
 using UnityEngine;
@@ -24,35 +24,51 @@ namespace NinjaPuzzle.Code.Unity.Tools
 		
 		private InputManager m_inputManager;
 
+		private EventManager m_eventManager;
+
 		[HideInInspector] public bool canMove = true;
 
 		private void Awake()
 		{
 			m_inputManager = NinjaPuzzleApp.Instance.UnityGameInstance.InputManager;
+			m_eventManager = NinjaPuzzleApp.Instance.UnityGameInstance.EventManager;
 		}
 
 		void Start()
 		{
 			m_characterController = GetComponent<CharacterController>();
-
-			// Lock cursor
-			/*Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;*/
 		}
+
+		private float m_axisY;
+		private float m_axisX;
 
 		void Update()
 		{
+			canMove = m_eventManager.GameState == EGameState.GamePlay;
+			
 			// We are grounded, so recalculate move direction based on axes
 			Vector3 forward = transform.TransformDirection(Vector3.forward);
 			Vector3 right = transform.TransformDirection(Vector3.right);
 			// Press Left Shift to run
-			bool isRunning = m_inputManager.Events[EButtonEvent.OnRun].IsPressed;
-			float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * m_inputManager.Axis.y : 0;
-			float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) *  m_inputManager.Axis.x : 0;
+			bool isRunning = m_inputManager.Events[EGameState.GamePlay][EButtonEvent.OnRun].IsPressed;
+
+			if (canMove)
+			{
+				m_axisY = m_inputManager.Axis.y;
+				m_axisX = m_inputManager.Axis.x;
+			}
+			else
+			{
+				m_axisY = Mathf.Lerp(m_axisY, 0, Time.deltaTime * 5);
+				m_axisX = Mathf.Lerp(m_axisX, 0, Time.deltaTime * 5);
+			}
+			
+			float curSpeedX = (isRunning ? runningSpeed : walkingSpeed) * m_axisY;
+			float curSpeedY = (isRunning ? runningSpeed : walkingSpeed) * m_axisX;
 			float movementDirectionY = m_moveDirection.y;
 			m_moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-			if (m_inputManager.Events[EButtonEvent.OnJump].IsPressed && canMove && m_characterController.isGrounded)
+			if (m_inputManager.Events[EGameState.GamePlay][EButtonEvent.OnJump].IsPressed && canMove && m_characterController.isGrounded)
 			{
 				m_moveDirection.y = jumpSpeed;
 			}

@@ -8,8 +8,6 @@ namespace NinjaPuzzle.Code.Gameplay.Managers
 		
 		public PlayerManager(GameController gameController) : base(gameController)
 		{
-			GameController.EventManager.OnGameInitialized += PlayerManagerInit;
-			
 			Player = new Player.Player();
 		}
 

@@ -1,6 +1,6 @@
-﻿using NinjaPuzzle.Code.Gameplay.Interfaces;
+﻿using NinjaPuzzle.Code.Unity.Interfaces;
 
-namespace NinjaPuzzle.Code.Gameplay.Managers
+namespace NinjaPuzzle.Code.Unity.Managers
 {
 	public class RuntimeData : IGameSaveData
 	{

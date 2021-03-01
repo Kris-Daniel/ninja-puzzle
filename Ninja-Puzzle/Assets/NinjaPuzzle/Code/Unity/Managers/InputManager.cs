@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using NinjaPuzzle.Code.Gameplay;
+using NinjaPuzzle.Code.Unity.Enums;
 using NinjaPuzzle.Code.Unity.GameSetup;
+using NinjaPuzzle.Code.Unity.Helpers;
 using UnityEngine;
 
 namespace NinjaPuzzle.Code.Unity.Managers
@@ -36,7 +37,7 @@ namespace NinjaPuzzle.Code.Unity.Managers
 	
 	public class InputManager : AUnityManager
 	{
-		public readonly Dictionary<EButtonEvent, EventData> Events = new Dictionary<EButtonEvent, EventData>();
+		public readonly Dictionary<EGameState, Dictionary<EButtonEvent, EventData>> Events = new Dictionary<EGameState, Dictionary<EButtonEvent, EventData>>();
 		public Vector2 Axis = Vector2.zero;
 		public Vector2 AxisMouse = Vector2.zero;
 		
@@ -53,15 +54,32 @@ namespace NinjaPuzzle.Code.Unity.Managers
 		};
 		
 		private const float HoldDurationDelta = 0.3f;
+		private EventManager EventManager => UnityGameInstance.EventManager;
+		private EGameState CurrentGameState => EventManager.GameState;
 
 		public InputManager(UnityGameInstance unityGameInstance) : base(unityGameInstance)
 		{
-			ExtensionTools.FastMapEnum<EButtonEvent>(buttonEventType =>
+			ExtensionTools.FastMapEnum<EGameState>(gameState =>
 			{
-				Events.Add(buttonEventType, new EventData());
+				Events.Add(gameState, new Dictionary<EButtonEvent, EventData>());
+				
+				ExtensionTools.FastMapEnum<EButtonEvent>(buttonEventType =>
+				{
+					Events[gameState].Add(buttonEventType, new EventData());
+				});
 			});
 		}
-		
+
+		public void ResetPrevData(EGameState current, EGameState prev)
+		{
+			foreach (var keyValuePair in Events[prev])
+			{
+				keyValuePair.Value.HoldDuration = 0;
+				keyValuePair.Value.IsHold = false;
+				keyValuePair.Value.IsPressed = false;
+			}
+		}
+
 		public override void Update()
 		{
 			Axis.x = Input.GetAxis("Horizontal");
@@ -79,32 +97,31 @@ namespace NinjaPuzzle.Code.Unity.Managers
 		{
 			if (Input.GetKeyDown(keyCode))
 			{
-				Events[buttonEvent].HoldDuration = 0;
-				Events[buttonEvent].Event?.Invoke(EEventStage.Down);
+				Events[CurrentGameState][buttonEvent].HoldDuration = 0;
+				Events[CurrentGameState][buttonEvent].Event?.Invoke(EEventStage.Down);
 			}
 
 			if (Input.GetKey(keyCode))
 			{
-				Events[buttonEvent].HoldDuration += Time.deltaTime;
-				Events[buttonEvent].IsPressed = true;
-				if (Events[buttonEvent].HoldDuration > HoldDurationDelta)
+				Events[CurrentGameState][buttonEvent].HoldDuration += Time.deltaTime;
+				Events[CurrentGameState][buttonEvent].IsPressed = true;
+				if (Events[CurrentGameState][buttonEvent].HoldDuration > HoldDurationDelta)
 				{
-					Events[buttonEvent].Event?.Invoke(EEventStage.Hold);
-					Events[buttonEvent].IsHold = true;
+					Events[CurrentGameState][buttonEvent].Event?.Invoke(EEventStage.Hold);
+					Events[CurrentGameState][buttonEvent].IsHold = true;
 				}
 			}
 
 			if (Input.GetKeyUp(keyCode))
 			{
-				if (Events[buttonEvent].HoldDuration < HoldDurationDelta)
+				if (Events[CurrentGameState][buttonEvent].HoldDuration < HoldDurationDelta)
 				{
-					Events[buttonEvent].Event?.Invoke(EEventStage.Click);
+					Events[CurrentGameState][buttonEvent].Event?.Invoke(EEventStage.Click);
 				}
-				Events[buttonEvent].Event?.Invoke(EEventStage.Up);
-				Events[buttonEvent].IsPressed = false;
-				Events[buttonEvent].IsHold = false;
+				Events[CurrentGameState][buttonEvent].Event?.Invoke(EEventStage.Up);
+				Events[CurrentGameState][buttonEvent].IsPressed = false;
+				Events[CurrentGameState][buttonEvent].IsHold = false;
 			}
 		}
-
 	}
 }
