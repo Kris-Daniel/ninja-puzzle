@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Kunai
   m_EditorClassIdentifier: 
   itemName: Kunai
-  itemTypeType: 0
   maxItemsInStack: 1
-  prefab: {fileID: 2212008272268637930, guid: 28a5ec21da7a3ad44b6689358117423c, type: 3}
+  prefab: {fileID: 8364211713665057781, guid: 0538d927f0d114c4aa0288f0a47da53d, type: 3}

@@ -18,9 +18,6 @@ namespace NinjaPuzzle.Code.Unity.Camera
 			{
 				//MovementComponent = Camera.GetComponent<CameraMovementComponent>();
 			}
-
-			TurnOffCamera();
-
 		}
 
 		public void TurnOnCamera()

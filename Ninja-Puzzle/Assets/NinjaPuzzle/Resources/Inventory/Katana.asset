@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Katana
   m_EditorClassIdentifier: 
   itemName: Katana
-  itemType: 4
   maxItemsInStack: 1
-  prefab: {fileID: 1189646617357321632, guid: 0538d927f0d114c4aa0288f0a47da53d, type: 3}
+  prefab: {fileID: 8364211713665057781, guid: 0538d927f0d114c4aa0288f0a47da53d, type: 3}

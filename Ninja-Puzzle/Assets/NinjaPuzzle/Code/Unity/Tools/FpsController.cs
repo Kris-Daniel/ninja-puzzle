@@ -16,7 +16,7 @@ namespace NinjaPuzzle.Code.Unity.Tools
 		[Header("Camera Parameters")]
 		public UnityEngine.Camera playerCamera;
 		public float lookSpeed = 2.0f;
-		public float lookXLimit = 45.0f;
+		public float lookXLimit = 88.0f;
 
 		private CharacterController m_characterController;
 		private Vector3 m_moveDirection = Vector3.zero;
