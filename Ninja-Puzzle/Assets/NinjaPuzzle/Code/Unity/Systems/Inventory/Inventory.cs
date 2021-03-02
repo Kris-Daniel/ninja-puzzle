@@ -50,10 +50,25 @@ namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 			return returnItemStack;
 		}
 		
-		public ItemStack SafeUseFromIndex(int stackIndex)
+		public ItemStack SafeUseFromIndex(int stackIndex, int count = -1)
 		{
 			ItemStack itemStack = Stacks[stackIndex];
-			Stacks[stackIndex] = new ItemStack();
+			if (count <= 0)
+			{
+				Stacks[stackIndex] = new ItemStack();
+			}
+			else
+			{
+				int itemRemains = Stacks[stackIndex].Get((uint) count);
+				if (itemRemains > 0 || itemRemains < 0)
+				{
+					Stacks[stackIndex] = new ItemStack();
+				}
+				else
+				{
+					itemStack = new ItemStack(Stacks[stackIndex].ItemData, (uint) count);
+				}
+			}
 			OnChange?.Invoke();
 			return itemStack;
 		}
