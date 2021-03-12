@@ -2,7 +2,7 @@
 
     <Template name="player-inventory-t" src="/Assets/NinjaPuzzle/Code/UI/Uxml/Components/PlayerInventoryComponent/PlayerInventory.uxml" />
     
-    <VisualElement name="inventory-layout" class="layout inventory-layout hide">
+    <VisualElement name="inventory-layout" class="layout inventory-layout">
 
         <Instance template="player-inventory-t" />
 

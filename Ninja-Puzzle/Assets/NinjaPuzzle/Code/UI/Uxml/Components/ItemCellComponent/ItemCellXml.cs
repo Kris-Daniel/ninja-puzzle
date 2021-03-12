@@ -1,19 +1,45 @@
-﻿using NinjaPuzzle.Code.UI.Uxml.Mixins;
+﻿using NinjaPuzzle.Code.UI.FrameWork;
 using NinjaPuzzle.Code.Unity.Systems.Inventory;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace NinjaPuzzle.Code.UI.Uxml.Components.ItemCellComponent
 {
 	public class ItemCellXml : AXmlController
 	{
-		public ItemCellXml(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement)
-		{}
+		public ItemCellXml(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement) { }
 
-		public static void Render(VisualElement xmlElement, ItemStack itemStack)
+		public static VisualElement InventoryGrid()
 		{
-			TextElement name = xmlElement.Q<TextElement>("item-cell_name");
-			TextElement counter = xmlElement.Q<TextElement>("item-cell_count");
+			VisualElement grid = new VisualElement();
+			grid.AddToClassList("inventory-grid");
+
+			return grid;
+		}
+		
+		public static VisualElement ItemCellLanding(string viewDataKey)
+		{
+			VisualElement itemCellLanding = new VisualElement();
+			itemCellLanding.AddToClassList("item-cell-landing");
+			itemCellLanding.name = "item-cell-landing";
+			itemCellLanding.viewDataKey = viewDataKey;
+
+			return  itemCellLanding;
+		}
+
+		public static VisualElement ItemCell(ItemStack itemStack, string viewDataKey)
+		{
+			VisualElement itemCell = PathManager.GetVisualElement("Components/ItemCellComponent/ItemCell");
+			itemCell.viewDataKey = viewDataKey;
+
+			FillItemCell(itemCell, itemStack);
+
+			return itemCell;
+		}
+
+		public static void FillItemCell(VisualElement itemCell, ItemStack itemStack)
+		{
+			TextElement name = itemCell.Q<TextElement>("item-cell_name");
+			TextElement counter = itemCell.Q<TextElement>("item-cell_count");
 
 			name.text = itemStack.ItemData.ItemName;
 			counter.text = itemStack.Count.ToString();

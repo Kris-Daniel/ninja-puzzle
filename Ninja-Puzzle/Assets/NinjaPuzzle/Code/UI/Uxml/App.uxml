@@ -1,0 +1,7 @@
+﻿<UXML xmlns="UnityEngine.UIElements">
+    <Style src="/Assets/NinjaPuzzle/Code/UI/Styles/Style.uss" />
+
+    <VisualElement name="app" class="app h100 rel">
+
+    </VisualElement>
+</UXML>

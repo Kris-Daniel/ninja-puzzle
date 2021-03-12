@@ -26,3 +26,7 @@
 .gui-layout{
     justify-content: flex-end;
 }
+
+.page{
+    height: 100%;
+}

@@ -1,6 +1,6 @@
 <UXML xmlns="UnityEngine.UIElements">
     <VisualElement class="hotbar" name="hotbar">
-        <VisualElement class="hotbar_band" name="hotbar_band">
+        <VisualElement class="hotbar_band" name="inventory">
             
            
             

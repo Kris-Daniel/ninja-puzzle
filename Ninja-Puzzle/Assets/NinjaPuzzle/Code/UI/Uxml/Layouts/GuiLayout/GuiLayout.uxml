@@ -1,8 +1,10 @@
-﻿<UXML xmlns="UnityEngine.UIElements">
+﻿<UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="UnityEngine.UIElements"
+      xsi:schemaLocation="UnityEngine.UIElements file:///C:/git/ninja-puzzle/Ninja-Puzzle/UIElementsSchema/UnityEngine.UIElements.xsd">
 
-    <Template name="hotbar-t" src="../../Components/HotBarComponent/HotBar.uxml" />
+    <Template name="hotbar-t" src="/Assets/NinjaPuzzle/Code/UI/Uxml/Components/HotBarComponent/HotBar.uxml" />
 
     <VisualElement name="gui-layout" class="layout abs-full" view-data-key="">
+        
         
         <VisualElement class="abs-center">
             <VisualElement class="aim" />

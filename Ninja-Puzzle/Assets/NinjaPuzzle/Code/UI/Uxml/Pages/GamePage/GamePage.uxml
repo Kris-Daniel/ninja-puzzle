@@ -1,0 +1,11 @@
+﻿<UXML xmlns="UnityEngine.UIElements">
+    
+    <Template name="gui-t" src="/Assets/NinjaPuzzle/Code/UI/Uxml/Layouts/GuiLayout/GuiLayout.uxml" />
+    <Template name="inventory-t" src="/Assets/NinjaPuzzle/Code/UI/Uxml/Layouts/InventoryLayout/InventoryLayout.uxml" />
+    
+    <VisualElement name="game-page" class="page page--game">
+        <Instance template="gui-t" class="abs-full" />
+        <Instance template="inventory-t" class="abs-full" />
+    </VisualElement>
+    
+</UXML>

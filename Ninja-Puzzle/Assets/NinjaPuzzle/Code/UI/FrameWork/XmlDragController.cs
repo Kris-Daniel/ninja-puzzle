@@ -4,7 +4,7 @@ using NinjaPuzzle.Code.Unity.Systems.Inventory;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace NinjaPuzzle.Code.UI.Uxml.Mixins
+namespace NinjaPuzzle.Code.UI.FrameWork
 {
 	public class XmlDragController : AXmlController
 	{
@@ -31,6 +31,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 			if(m_currentItemStack.ItemData) return;
 			
 			m_currentItemCell = ((VisualElement) evt.target).ClosestParent("item-cell");
+			
 
 			if (m_currentItemCell != null)
 			{
@@ -52,6 +53,10 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 					m_currentItemCell.style.top = evt.position.y - m_offset.y;
 					
 					m_currentItemStack = inventory.SafeUseFromIndex(int.Parse(m_currentItemCell.viewDataKey));
+				}
+				else
+				{
+					m_currentItemCell = null;
 				}
 			}
 		}
@@ -76,6 +81,8 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 				if (itemCellLanding != null)
 				{
 					VisualElement inventoryXml = itemCellLanding.ClosestParent("inventory");
+					
+					Debug.Log(inventoryXml);
 
 					var inventory = UnityGameInstance.InventoryManager.Inventories[int.Parse(inventoryXml.viewDataKey)];
 
@@ -84,7 +91,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 					if (remains.Count > 0)
 					{
 						m_currentItemStack = remains;
-						ItemCellXml.Render(m_currentItemCell, m_currentItemStack);
+						ItemCellXml.FillItemCell(m_currentItemCell, m_currentItemStack);
 					}
 					else
 					{
@@ -93,6 +100,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Mixins
 				}
 				else
 				{
+					Debug.Log(m_currentInventory);
 					m_currentInventory.SafeAdd(m_currentItemStack.ItemData, (uint) m_currentItemStack.Count);
 					ResetDragData();
 				}

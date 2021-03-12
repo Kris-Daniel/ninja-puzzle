@@ -1,6 +1,5 @@
-﻿using NinjaPuzzle.Code.UI.Uxml.Components.PlayerInventoryComponent;
-using NinjaPuzzle.Code.UI.Uxml.Mixins;
-using NinjaPuzzle.Code.UI.Uxml.Pages.GuiPage;
+﻿using NinjaPuzzle.Code.UI.FrameWork;
+using NinjaPuzzle.Code.UI.Uxml.Components.PlayerInventoryComponent;
 using NinjaPuzzle.Code.Unity.Systems.Inventory;
 using UnityEngine.UIElements;
 
@@ -19,16 +18,15 @@ namespace NinjaPuzzle.Code.UI.Uxml.Layouts.InventoryLayout
 
 		public void Toggle(Inventory inventory)
 		{
-			XmlElement.ToggleInClassList("hide");
-			((GuiPageXml) Parent).GuiLayout.XmlElement.ToggleInClassList("hide");
+			XmlElement.parent.ToggleInClassList("hide");
 
-			if (!XmlElement.ClassListContains("hide"))
+			if (!XmlElement.parent.ClassListContains("hide"))
 			{
-				m_playerInventoryXml.Render(inventory);
+				m_playerInventoryXml.Show(inventory);
 			}
 			else
 			{
-				m_playerInventoryXml.UnRender(inventory);
+				m_playerInventoryXml.Hide(inventory);
 			}
 		}
 	}

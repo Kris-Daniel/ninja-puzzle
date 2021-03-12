@@ -1,5 +1,5 @@
-﻿using NinjaPuzzle.Code.UI.Uxml.Components.HotBarComponent;
-using NinjaPuzzle.Code.UI.Uxml.Mixins;
+﻿using NinjaPuzzle.Code.UI.FrameWork;
+using NinjaPuzzle.Code.UI.Uxml.Components.HotBarComponent;
 using UnityEngine.UIElements;
 
 namespace NinjaPuzzle.Code.UI.Uxml.Layouts.GuiLayout

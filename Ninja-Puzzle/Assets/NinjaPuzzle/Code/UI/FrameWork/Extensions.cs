@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine.UIElements;
 
-namespace NinjaPuzzle.Code.UI.Uxml.Mixins
+namespace NinjaPuzzle.Code.UI.FrameWork
 {
 	public static class Extensions
 	{

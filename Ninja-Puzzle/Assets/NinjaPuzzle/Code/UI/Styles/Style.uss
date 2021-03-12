@@ -4,3 +4,13 @@
 @import "Layouts.uss";
 @import "Components.uss";
 @import "Common.uss";
+
+.hide{
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    visibility: hidden !important;
+    position: absolute !important;
+    display: none !important;
+}
