@@ -37,23 +37,22 @@ namespace NinjaPuzzle.Code.Unity.Player
 		{
 			if (eventStage == EEventStage.Down)
 			{
-				if (m_inventory.Stacks[1].Count > 0)
+				if (m_inventory.Stacks[2].Count > 0)
 				{
-					var itemGo = Instantiate(m_inventory.Stacks[1].ItemData.Prefab);
-					projectileLauncher.SetProjectile(itemGo.Rigidbody);
+					var itemGo = Instantiate(m_inventory.Stacks[2].ItemData.Prefab);
+					projectileLauncher.LoadProjectile(itemGo.Rigidbody);
 				}
 			}
 			
 			if (eventStage == EEventStage.Hold)
 			{
-				projectileLauncher.SetTarget(MainCamera.Instance.RayCastForward());
+				// spawn sphere
 			}
 			
 			if (eventStage == EEventStage.Up)
 			{
-				projectileLauncher.Launch();
-				projectileLauncher.ToggleDraw(false);
-				m_inventory.SafeUseFromIndex(1, 1);
+				projectileLauncher.Launch(MainCamera.Instance.RayCastForward());
+				m_inventory.SafeUseFromIndex(2, 1);
 			}
 		}
 	}

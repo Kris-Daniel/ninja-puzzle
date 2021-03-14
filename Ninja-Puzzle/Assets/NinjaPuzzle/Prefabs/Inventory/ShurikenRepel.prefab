@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8596132485622751441}
   - component: {fileID: 8596132485622751442}
   - component: {fileID: 5780637836969275554}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShurikenRepel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,3 +108,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efce71ebd4b24360a9f6f4e4e5c86c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidbody: {fileID: 0}

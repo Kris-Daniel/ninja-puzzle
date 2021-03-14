@@ -50,7 +50,7 @@ namespace NinjaPuzzle.Code.Unity.Camera
 			}
 			else
 			{
-				result = RayOrigin.origin + RayOrigin.direction * 20;
+				result = RayOrigin.origin + RayOrigin.direction * 60;
 			}
 			
 			return result;

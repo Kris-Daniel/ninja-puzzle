@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6994158040811593287}
   - component: {fileID: 6838270987594309822}
   - component: {fileID: 1077853834261681765}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ArcStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 8653792105004846079}
   - component: {fileID: 6015481260522653964}
   - component: {fileID: 6129635336783607406}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShurikenBlades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 2749558697546292685}
   - component: {fileID: 7958176492522769797}
   - component: {fileID: 8113694523926164182}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShurikenBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
