@@ -46,7 +46,7 @@ namespace NinjaPuzzle.Code.Unity.Player
 			
 			if (eventStage == EEventStage.Hold)
 			{
-				projectileLauncher.SetTarget(RayCastForward());
+				projectileLauncher.SetTarget(MainCamera.Instance.RayCastForward());
 			}
 			
 			if (eventStage == EEventStage.Up)
@@ -55,29 +55,6 @@ namespace NinjaPuzzle.Code.Unity.Player
 				projectileLauncher.ToggleDraw(false);
 				m_inventory.SafeUseFromIndex(1, 1);
 			}
-		}
-
-		Vector3 RayCastForward()
-		{
-			Vector3 result = Vector3.zero;
-
-			Ray RayOrigin;
-			RaycastHit HitInfo;
-			
-			RayOrigin = new Ray(MainCamera.Instance.Camera.transform.position, MainCamera.Instance.Camera.transform.forward);
-			
-			if (Physics.Raycast(RayOrigin, out HitInfo,20f))
-			{
-				Debug.DrawRay(RayOrigin.origin,HitInfo.point - RayOrigin.origin ,Color.yellow);
-				
-				result = HitInfo.point;
-			}
-			else
-			{
-				result = RayOrigin.origin + RayOrigin.direction * 20;
-			}
-			
-			return result;
 		}
 	}
 }

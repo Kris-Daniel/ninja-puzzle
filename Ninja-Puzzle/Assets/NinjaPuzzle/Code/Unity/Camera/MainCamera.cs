@@ -7,8 +7,6 @@ namespace NinjaPuzzle.Code.Unity.Camera
 	{
 		public UnityEngine.Camera Camera { get; private set; }
 
-		//public CameraMovementComponent MovementComponent { get; private set; }
-
 		protected override void Init()
 		{
 			base.Init();
@@ -30,15 +28,32 @@ namespace NinjaPuzzle.Code.Unity.Camera
 			Camera.enabled = false;
 		}
 
-
 		public Vector3 GetVectorTowardsCamera(Vector3 pos)
 		{
 			return (Transform.position - pos).normalized;
 		}
+		
+		public Vector3 RayCastForward()
+		{
+			Vector3 result = Vector3.zero;
 
-//        public Vector3 GetPositionOnMouseDragPlane(Vector3 pos)
-//        {
-//            return pos + GetVectorTowardsCamera(pos) * BattleMovementManager.Instance.MoveSettings.MouseDragDistanceFromBoard;
-//        }
+			Ray RayOrigin;
+			RaycastHit HitInfo;
+			
+			RayOrigin = new Ray(transform.position, MainCamera.Instance.Camera.transform.forward);
+			
+			if (Physics.Raycast(RayOrigin, out HitInfo,20f))
+			{
+				Debug.DrawRay(RayOrigin.origin,HitInfo.point - RayOrigin.origin ,Color.yellow);
+				
+				result = HitInfo.point;
+			}
+			else
+			{
+				result = RayOrigin.origin + RayOrigin.direction * 20;
+			}
+			
+			return result;
+		}
 	}
 }

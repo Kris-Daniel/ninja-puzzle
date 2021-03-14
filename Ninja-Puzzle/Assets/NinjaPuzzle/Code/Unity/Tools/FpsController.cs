@@ -14,7 +14,7 @@ namespace NinjaPuzzle.Code.Unity.Tools
 		public float jumpSpeed = 8.0f;
 		public float gravity = 20.0f;
 		[Header("Camera Parameters")]
-		public UnityEngine.Camera playerCamera;
+		public Transform playerCamera;
 		public float lookSpeed = 2.0f;
 		public float lookXLimit = 88.0f;
 
