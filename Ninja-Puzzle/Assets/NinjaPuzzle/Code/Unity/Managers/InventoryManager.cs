@@ -38,13 +38,14 @@ namespace NinjaPuzzle.Code.Unity.Managers
 			{
 				{EItem.Katana, 1},
 				{EItem.Kunai, 1},
-				{EItem.ShurikenAttract, 2},
-				{EItem.ShurikenRepel, 6}
+				{EItem.ShurikenAttract, 16},
+				{EItem.ShurikenRepel, 32}
 			};
 			
 			foreach (var keyValuePair in defaultItems)
 			{
-				inventory.SafeAdd(m_scriptableDataManager.Items[keyValuePair.Key], keyValuePair.Value);
+				var itemStack = new ItemStack(m_scriptableDataManager.Items[keyValuePair.Key], keyValuePair.Value);
+				inventory.SafeAddToIndex(itemStack, itemStack.ItemData.InventoryIndex);
 			}
 		}
 	}

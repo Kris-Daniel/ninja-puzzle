@@ -17,14 +17,15 @@ namespace NinjaPuzzle.Code.Unity.Managers
 
 	public enum EButtonEvent
 	{
-		OnFire1    = 1 << 0,
-		OnFire2    = 1 << 1,
-		OnInteract = 1 << 2,
-		OnWeapon1  = 1 << 3,
-		OnWeapon2  = 1 << 4,
-		OnRun      = 1 << 5,
-		OnJump     = 1 << 6,
-		OnInventory = 1 << 7
+		OnFire1,
+		OnFire2,
+		OnToggleFire,
+		OnInteract,
+		OnWeapon1,
+		OnWeapon2,
+		OnRun,
+		OnJump,
+		OnInventory
 	}
 	
 	public class EventData
@@ -45,6 +46,7 @@ namespace NinjaPuzzle.Code.Unity.Managers
 		{
 			{EButtonEvent.OnFire1, KeyCode.Mouse0},
 			{EButtonEvent.OnFire2, KeyCode.Mouse1},
+			{EButtonEvent.OnToggleFire, KeyCode.LeftControl},
 			{EButtonEvent.OnInteract, KeyCode.F},
 			{EButtonEvent.OnWeapon1, KeyCode.Q},
 			{EButtonEvent.OnWeapon2, KeyCode.E},
@@ -59,11 +61,11 @@ namespace NinjaPuzzle.Code.Unity.Managers
 
 		public InputManager(UnityGameInstance unityGameInstance) : base(unityGameInstance)
 		{
-			ExtensionTools.FastMapEnum<EGameState>(gameState =>
+			ExtensionTools.MapEnum<EGameState>(gameState =>
 			{
 				Events.Add(gameState, new Dictionary<EButtonEvent, EventData>());
 				
-				ExtensionTools.FastMapEnum<EButtonEvent>(buttonEventType =>
+				ExtensionTools.MapEnum<EButtonEvent>(buttonEventType =>
 				{
 					Events[gameState].Add(buttonEventType, new EventData());
 				});
@@ -87,7 +89,7 @@ namespace NinjaPuzzle.Code.Unity.Managers
 			AxisMouse.x = Input.GetAxis("Mouse X");
 			AxisMouse.y = Input.GetAxis("Mouse Y");
 			
-			ExtensionTools.FastMapEnum<EButtonEvent>(buttonEventType =>
+			ExtensionTools.MapEnum<EButtonEvent>(buttonEventType =>
 			{
 				CheckForButton(buttonEventType, m_keyCodeForButtonEvents[buttonEventType]);
 			});

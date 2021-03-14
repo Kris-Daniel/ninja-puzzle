@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using NinjaPuzzle.Code.Unity.ScriptableObjects.Inventory;
-using UnityEngine;
 
 namespace NinjaPuzzle.Code.Unity.Systems.Inventory
 {

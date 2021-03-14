@@ -13,7 +13,7 @@ namespace NinjaPuzzle.Code.UI.Uxml.Layouts.InventoryLayout
 		public InventoryLayoutXml(AXmlController parent, VisualElement xmlElement) : base(parent, xmlElement)
 		{
 			m_playerInventoryXml = new PlayerInventoryXml(this, XmlElement.Q("inventory"));
-			EventManager.OnToggleInventory += Toggle;
+			//EventManager.OnToggleInventory += Toggle;
 		}
 
 		public void Toggle(Inventory inventory)

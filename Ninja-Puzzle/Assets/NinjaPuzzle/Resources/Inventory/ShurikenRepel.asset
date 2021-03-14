@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ShurikenRepel
   m_EditorClassIdentifier: 
   itemName: Shuriken Repel
-  maxItemsInStack: 4
+  maxItemsInStack: 99
   prefab: {fileID: 6994158040811593287, guid: c331dc0ed9f9a74478dcd8e9eac0482c, type: 3}
+  inventoryIndex: 3

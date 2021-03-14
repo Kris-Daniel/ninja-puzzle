@@ -15,3 +15,4 @@ MonoBehaviour:
   itemName: Kunai
   maxItemsInStack: 1
   prefab: {fileID: 8364211713665057781, guid: 0538d927f0d114c4aa0288f0a47da53d, type: 3}
+  inventoryIndex: 1

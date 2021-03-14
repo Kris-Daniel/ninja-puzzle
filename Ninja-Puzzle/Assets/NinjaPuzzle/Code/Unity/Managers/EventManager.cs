@@ -8,7 +8,6 @@ namespace NinjaPuzzle.Code.Unity.Managers
 {
 	public class EventManager : AUnityManager
 	{
-		public Action<Inventory> OnToggleInventory;
 		public Action<Inventory> OnPlayerInventoryInit;
 		public Action<EGameState, EGameState> OnChangeGameState;
 
@@ -16,11 +15,12 @@ namespace NinjaPuzzle.Code.Unity.Managers
 
 		public EventManager(UnityGameInstance unityGameInstance) : base(unityGameInstance)
 		{
-			SetCallbacks();
+			//SetCallbacks();
 			OnChangeGameState += UnityGameInstance.InputManager.ResetPrevData;
 			Cursor.lockState = CursorLockMode.Locked;
 		}
 
+		// TODO change for enter menu with ESC
 		private void SetCallbacks()
 		{
 			Action<EEventStage, EGameState> callback = (eventStage, gameState) =>
